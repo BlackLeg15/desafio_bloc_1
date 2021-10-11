@@ -14,19 +14,7 @@ class FetchingAnimePostsState extends AnimePostsState {
 }
 
 class FetchedAnimePostsState extends AnimePostsState {
-  //final List<PostResponse> listOfAnimePostsToShow;
-
   const FetchedAnimePostsState();
-
-  // @override
-  // bool operator ==(Object o) {
-  //   if (identical(this, o)) return true;
-
-  //   return o is FetchedAnimePostsState && o.listOfAnimePostsToShow == listOfAnimePostsToShow;
-  // }
-
-  // @override
-  // int get hashCode => listOfAnimePostsToShow.hashCode;
 }
 
 class AnimePostsErrorState extends AnimePostsState {

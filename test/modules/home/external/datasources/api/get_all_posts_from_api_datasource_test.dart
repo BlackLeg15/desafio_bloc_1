@@ -20,7 +20,7 @@ main() {
   setUpAll(() {
     _httpServiceMock = HttpServiceMock();
     _datasource = GetAllPostsFromApiDatasource(_httpServiceMock);
-    registerFallbackValue<GetAllPostsParams>(GetAllPostsParams(1, 1));
+    registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
   group('GetAllPostsUseCase', () {

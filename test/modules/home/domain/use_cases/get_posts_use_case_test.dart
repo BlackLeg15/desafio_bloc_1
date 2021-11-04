@@ -17,7 +17,7 @@ main() {
   setUpAll(() {
     _repository = GetAllPostsRepositoryMock();
     _usecase = GetAllPostsUseCaseImpl(_repository);
-    registerFallbackValue<GetAllPostsParams>(GetAllPostsParams(1, 1));
+    registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
   group('GetAllPostsUseCase', () {

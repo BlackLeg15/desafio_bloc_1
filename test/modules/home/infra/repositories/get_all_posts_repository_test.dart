@@ -17,7 +17,7 @@ main() {
   setUpAll(() {
     _datasource = GetAllPostsDatasourceMock();
     _repository = GetAllPostsRepositoryImpl(_datasource);
-    registerFallbackValue<GetAllPostsParams>(GetAllPostsParams(1, 1));
+    registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
   group('GetAllPostsUseCase', () {

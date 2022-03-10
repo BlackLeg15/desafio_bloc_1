@@ -10,18 +10,13 @@ part 'events/anime_posts_events.dart';
 part 'states/anime_posts_states.dart';
 
 class AnimePostsBloc extends Bloc<AnimePostsEvent, AnimePostsState> {
-  
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState());
-
-  @override
-  Stream<AnimePostsState> mapEventToState(AnimePostsEvent event) async* {
-
-    yield const FetchingAnimePostsState();
-    if (event is FetchAnimePostsEvent) {
+  AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState()) {
+    on<FetchAnimePostsEvent>((event, emit) async {
+      emit(const FetchingAnimePostsState());
       final result = await getAllPostsUseCase(GetAllPostsParams(event.parameters.page, event.parameters.postsPerPage));
-      yield result.fold<AnimePostsState>((error) {
+      emit(result.fold<AnimePostsState>((error) {
         event.onErrorCallback?.call();
         return AnimePostsErrorState(error.message);
       }, (fetchedListOfPosts) {
@@ -31,7 +26,7 @@ class AnimePostsBloc extends Bloc<AnimePostsEvent, AnimePostsState> {
         ];
         event.onStateCallback?.call(listOfPostsToShow);
         return FetchedAnimePostsState();
-      });
-    }
+      }));
+    });
   }
 }

@@ -26,4 +26,9 @@ jobs:
       - run: flutter test --machine > test-results.json
       - uses: dorny/test-reporter@v1.5.0
         with:
+          name: test-results
+          path: test-results.json
+          reporter: flutter-json
+      - uses: VeryGoodOpenSource/very_good_coverage@v1.2.1
+        with:
           min_coverage: 0

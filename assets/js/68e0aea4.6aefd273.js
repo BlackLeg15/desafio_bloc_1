@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[583],{3825:function(e){e.exports=JSON.parse('{"allTagsPath":"/desafio_bloc_1/blog/tags","slug":"/desafio_bloc_1/blog/tags/facebook","name":"facebook","count":1,"permalink":"/desafio_bloc_1/blog/tags/facebook"}')}}]);

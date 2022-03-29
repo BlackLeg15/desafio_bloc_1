@@ -13,7 +13,7 @@ part 'states/anime_posts_states.dart';
 class AnimePostsBloc extends Bloc<AnimePostsEvent, AnimePostsState> {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState([])) {
+  AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState(const [])) {
     on<FetchAnimePostsEvent>((event, emit) async {
       emit(FetchingAnimePostsState(state.animePosts, state.page + 1));
       final result = await getAllPostsUseCase(GetAllPostsParams(state.page, FetchAnimePostsParameters.postsPerPage));

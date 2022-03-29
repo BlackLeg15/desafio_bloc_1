@@ -1,10 +1,8 @@
 import 'custom_error.dart';
 
 class DomainError extends CustomError {
-  final String message;
-  final StackTrace stackTrace;
 
-  DomainError({required this.message, required this.stackTrace})
+  DomainError({required String message, required StackTrace stackTrace})
       : super(message: message, stackTrace: stackTrace);
 
   @override

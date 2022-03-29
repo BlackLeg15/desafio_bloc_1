@@ -3,12 +3,10 @@ import '../helpers/errors_stacktrace.dart';
 import 'custom_error.dart';
 
 class DataSourceError extends CustomError {
-  final String message;
-  final StackTrace stackTrace;
 
   DataSourceError(
-    this.message,
-    this.stackTrace,
+    String message,
+    StackTrace stackTrace,
   ) : super(message: message, stackTrace: stackTrace) {
      ErrorsStacktrace.printError(
       stackTrace: stackTrace,

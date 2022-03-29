@@ -1,4 +1,4 @@
-final getAllPostsPayload = r'''
+const getAllPostsPayload = r'''
 [
   {
     "id": null,

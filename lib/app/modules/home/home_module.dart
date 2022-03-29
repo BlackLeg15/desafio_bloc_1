@@ -1,3 +1,4 @@
+import 'external/datasources/api/mapper/get_all_posts_from_api_mapper.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/services/http_service.dart';
@@ -12,11 +13,12 @@ class HomeModule extends Module{
   @override
   final List<Bind> binds = [
     Bind((i) => HomeController(i())),
-    Bind.factory((i) => AnimePostsBloc(i())),
-    Bind.factory((i) => GetAllPostsUseCaseImpl(i())),
-    Bind.factory((i) => GetAllPostsRepositoryImpl(i())),
-    Bind.factory((i) => GetAllPostsFromApiDatasource(i())),
-    Bind.factory((i) => HttpService()),
+    Bind((i) => AnimePostsBloc(i())),
+    Bind((i) => GetAllPostsUseCaseImpl(i())),
+    Bind((i) => GetAllPostsRepositoryImpl(i())),
+    Bind((i) => GetAllPostsFromApiDatasource(i(), i())),
+    Bind((i) => GetAllPostsFromApiMapper()),
+    Bind((i) => HttpService()),
   ];
 
   @override

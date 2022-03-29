@@ -5,6 +5,7 @@ import 'package:desafio_bloc_1/app/core/services/http_service.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/entities/anime_post_entity.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/params/get_all_posts_params.dart';
 import 'package:desafio_bloc_1/app/modules/home/external/datasources/api/get_all_posts_from_api_datasource.dart';
+import 'package:desafio_bloc_1/app/modules/home/external/datasources/api/mapper/get_all_posts_from_api_mapper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -19,7 +20,7 @@ main() {
 
   setUpAll(() {
     _httpServiceMock = HttpServiceMock();
-    _datasource = GetAllPostsFromApiDatasource(_httpServiceMock);
+    _datasource = GetAllPostsFromApiDatasource(_httpServiceMock, GetAllPostsFromApiMapper());
     registerFallbackValue(GetAllPostsParams(1, 1));
   });
 

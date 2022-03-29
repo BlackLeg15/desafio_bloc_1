@@ -9,20 +9,21 @@ import '../../../infra/datasources/get_all_posts_datasource.dart';
 import 'mapper/get_all_posts_from_api_mapper.dart';
 
 class GetAllPostsFromApiDatasource implements GetAllPostsDatasource {
+  final GetAllPostsFromApiMapper _mapper;
   final HttpService _httpService;
 
-  GetAllPostsFromApiDatasource(this._httpService);
+  GetAllPostsFromApiDatasource(this._httpService, this._mapper);
 
   @override
   Future<List<AnimePostEntity>> getAllPosts(GetAllPostsParams params) async {
     try {
       final response = await _httpService.get(Endpoints.postsUrl(params.page, params.numberOfPostsPerPage));
-      final postList = GetAllPostsFromApiMapper.fromJsonList(response.data);
+      final postList = _mapper.fromJsonList(response.data);
       return postList;
-    } on DioError catch (e, s) {
-      throw DataSourceError('${e.response?.data['message']}', s);
-    } catch (e, s) {
-      throw DataSourceError('Erro: ${e.toString()}', s);
+    } on DioError catch (error, stacktrace) {
+      throw DataSourceError(error.response?.statusMessage ?? 'Não foi possível buscar mais posts', stacktrace);
+    } catch (error, stacktrace) {
+      throw DataSourceError('Erro: ${error.toString()}', stacktrace);
     }
   }
 }

@@ -6,10 +6,8 @@ abstract class AnimePostsEvent {
 }
 
 class FetchAnimePostsEvent extends AnimePostsEvent {
-  final FetchAnimePostsEventParams parameters;
-  final List<AnimePostEntity> actualListOfAnimePosts;
-  final Function(List<AnimePostEntity> newListOfAnimePosts)? onStateCallback;
+  final VoidCallback? onStateCallback;
   final VoidCallback? onErrorCallback;
 
-  const FetchAnimePostsEvent({required this.parameters, required this.actualListOfAnimePosts, this.onStateCallback, this.onErrorCallback});
+  const FetchAnimePostsEvent({this.onStateCallback, this.onErrorCallback});
 }

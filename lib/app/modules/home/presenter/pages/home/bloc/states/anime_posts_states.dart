@@ -1,34 +1,41 @@
 part of '../anime_posts_bloc.dart';
 
 @immutable
-abstract class AnimePostsState {
-  const AnimePostsState();
+abstract class AnimePostsState extends Equatable {
+  final int page;
+  final int postsPerPage;
+  final List<AnimePostEntity> animePosts;
+
+  const AnimePostsState(this.animePosts, this.page, this.postsPerPage);
+
+  @override
+  List<Object?> get props => [
+        page,
+        postsPerPage,
+        animePosts
+      ];
 }
 
 class AnimePostsInitialState extends AnimePostsState {
-  const AnimePostsInitialState();
+  AnimePostsInitialState(List<AnimePostEntity> animePosts, {int? initialPage}) : super(animePosts, initialPage ?? FetchAnimePostsParameters.initialPage, FetchAnimePostsParameters.postsPerPage);
 }
 
 class FetchingAnimePostsState extends AnimePostsState {
-  const FetchingAnimePostsState();
+  FetchingAnimePostsState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
 }
 
 class FetchedAnimePostsState extends AnimePostsState {
-  const FetchedAnimePostsState();
+  FetchedAnimePostsState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
 }
 
 class AnimePostsErrorState extends AnimePostsState {
   final String message;
 
-  const AnimePostsErrorState(this.message);
+  AnimePostsErrorState(this.message, List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is AnimePostsErrorState && o.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  List<Object?> get props => super.props
+    ..addAll([
+      message.hashCode
+    ]);
 }

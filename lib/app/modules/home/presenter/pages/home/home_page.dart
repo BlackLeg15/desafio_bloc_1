@@ -17,7 +17,47 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _HomePageState extends State<HomePage> {
+  var lockUpdatePostList = false;
+  late final HomeController controller;
+  late final ScrollController scrollControllerForPagination;
+
+  @override
+  void initState() {
+    super.initState();
+    initHomePage();
+  }
+
+  void initHomePage() {
+    getHomeControllerInstance();
+    configPagination();
+    fetchAnimePosts();
+  }
+
+  void getHomeControllerInstance() {
+    controller = Modular.get();
+  }
+
+  void configPagination() {
+    scrollControllerForPagination = ScrollController();
+    scrollControllerForPagination.addListener(() {
+      if (canFetch) {
+        fetchAnimePosts();
+      }
+    });
+  }
+
+  bool get canFetch => scrollControllerForPagination.offset >= scrollControllerForPagination.position.maxScrollExtent - 100 && !lockUpdatePostList;
+
+  void fetchAnimePosts() {
+    lockUpdatePostList = true;
+    controller.fetchAnimePosts(onFinishFetchPosts);
+  }
+
+  void onFinishFetchPosts() {
+    lockUpdatePostList = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +74,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         },
         builder: (context, animePostsState) {
           final animePostsList = controller.posts;
+          if (animePostsList.isEmpty) {
+            return const HomeLoadingWidget();
+          }
           return ListView.builder(
-            controller: controller.scrollControllerForPagination,
+            controller: scrollControllerForPagination,
             itemCount: animePostsList.length + 1,
             itemBuilder: (context, index) {
               if (isTheLastIndexOfTheAnimePostList(index)) {

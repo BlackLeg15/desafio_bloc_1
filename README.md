@@ -1,10 +1,11 @@
 # desafio_bloc_1
 
 ## Features:
-- Clean Dart
 - Bloc
+- Clean Dart
+- Modular
 - Unit tests
 
 ## Project specs
-- Flutter 2.10.4
 - Dart 2.16.1
+- Flutter 2.10.4

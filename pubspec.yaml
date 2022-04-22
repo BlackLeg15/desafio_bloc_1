@@ -13,7 +13,7 @@ dependencies:
   dartz: ^0.10.1
   dio: ^4.0.5
   flutter_bloc: ^8.0.1
-  flutter_modular: ^4.5.0
+  flutter_modular: 4.5.1+1
   url_launcher: ^6.0.20
   equatable: ^2.0.3
 
@@ -23,6 +23,7 @@ dev_dependencies:
     sdk: flutter
   mocktail: ^0.3.0
   bloc_test: ^9.0.3
+  modular_test: 1.0.1+2
 
 flutter:
   uses-material-design: true

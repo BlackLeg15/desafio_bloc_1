@@ -5,6 +5,7 @@
 - Clean Dart
 - Modular
 - Unit tests
+- Bloc tests
 
 ## Project specs
 - Dart 2.16.1

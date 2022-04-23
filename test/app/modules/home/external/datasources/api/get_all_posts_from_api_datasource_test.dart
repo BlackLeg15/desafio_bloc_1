@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:desafio_bloc_1/app/core/errors/datasource_error.dart';
 import 'package:desafio_bloc_1/app/core/services/http_client/base/http_client.dart';
 import 'package:desafio_bloc_1/app/core/services/http_client/base/http_client_response.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/entities/anime_post_entity.dart';
@@ -32,9 +31,9 @@ main() {
       expect(response, completion(isA<List<AnimePostEntity>>()));
     });
     test('| should complete with an error', () {
-      when(() =>_httpServiceMock.get(any())).thenThrow(DataSourceError('An error occured', StackTrace.empty));
+      when(() => _httpServiceMock.get(any())).thenThrow(ArgumentError('An error occured'));
       final response = _datasource.getAllPosts(GetAllPostsParams(1, 1));
-      expect(response, throwsA(isA<DataSourceError>()));
+      expect(response, throwsA(isA<ArgumentError>()));
     });
   });
 }

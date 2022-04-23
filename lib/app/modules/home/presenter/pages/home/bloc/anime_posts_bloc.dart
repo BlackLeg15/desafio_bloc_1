@@ -15,18 +15,20 @@ class AnimePostsBloc extends Bloc<AnimePostsEvent, AnimePostsState> {
 
   AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState(const [])) {
     on<FetchAnimePostsEvent>((event, emit) async {
-      emit(FetchingAnimePostsState(state.animePosts, state.page));
-      final result = await getAllPostsUseCase(GetAllPostsParams(state.page, FetchAnimePostsParameters.postsPerPage));
+      final currentPage = state.page;
+      final pageToBeFetched = currentPage + 1;
+      emit(FetchingAnimePostsState(state.animePosts, currentPage));
+      final result = await getAllPostsUseCase(GetAllPostsParams(pageToBeFetched, FetchAnimePostsParameters.postsPerPage));
       emit(result.fold<AnimePostsState>((error) {
         event.onErrorCallback?.call();
-        return AnimePostsErrorState(error.message, state.animePosts, state.page);
+        return AnimePostsErrorState(error.message, state.animePosts, currentPage);
       }, (fetchedListOfPosts) {
         final listOfPostsToShow = [
           ...state.animePosts,
           ...fetchedListOfPosts
         ];
         event.onStateCallback?.call();
-        return FetchedAnimePostsState(listOfPostsToShow, state.page + 1);
+        return FetchedAnimePostsState(listOfPostsToShow, pageToBeFetched);
       }));
     });
   }

@@ -11,15 +11,13 @@ import 'package:mocktail/mocktail.dart';
 class GetAllPostsUseCaseMock extends Mock implements GetAllPostsUseCase {}
 
 void main() {
-  late GetAllPostsUseCaseMock useCaseMock;
-  late List<AnimePostEntity> resultFromUsecase;
-
-  setUp(() {
-    useCaseMock = GetAllPostsUseCaseMock();
-    registerFallbackValue(GetAllPostsParams(1, 10));
-  });
-
   group('Teste de chamada do evento de buscar mais posts |', () {
+    late GetAllPostsUseCaseMock useCaseMock;
+    late List<AnimePostEntity> resultFromUsecase;
+    setUpAll(() {
+      useCaseMock = GetAllPostsUseCaseMock();
+      registerFallbackValue(GetAllPostsParams(1, 10));
+    });
     blocTest<AnimePostsBloc, AnimePostsState>('1. Bem-sucedida',
         setUp: () {
           //SETUP RESULT
@@ -29,8 +27,8 @@ void main() {
         build: () => AnimePostsBloc(useCaseMock),
         act: (bloc) => bloc.add(const FetchAnimePostsEvent()),
         expect: () => [
-              FetchingAnimePostsState(const [], 1),
-              FetchedAnimePostsState(resultFromUsecase, 2)
+              FetchingAnimePostsState(const [], 0),
+              FetchedAnimePostsState(resultFromUsecase, 1)
             ],
         verify: (bloc) {
           final animePosts = bloc.state.animePosts;
@@ -47,8 +45,8 @@ void main() {
         build: () => AnimePostsBloc(useCaseMock),
         act: (bloc) => bloc.add(const FetchAnimePostsEvent()),
         expect: () => [
-              FetchingAnimePostsState(const [], 1),
-              AnimePostsErrorState('Erro', const [], 1)
+              FetchingAnimePostsState(const [], 0),
+              AnimePostsErrorState('Erro', const [], 0)
             ],
         verify: (bloc) {
           final animePosts = bloc.state.animePosts;

@@ -12,13 +12,13 @@ import 'presenter/pages/home/home_page.dart';
 class HomeModule extends Module{
   @override
   final List<Bind> binds = [
-    Bind((i) => HomeController(i())),
-    Bind((i) => AnimePostsBloc(i())),
-    Bind((i) => GetAllPostsUseCaseImpl(i())),
-    Bind((i) => GetAllPostsRepositoryImpl(i())),
-    Bind((i) => GetAllPostsFromApiDatasource(i(), i())),
-    Bind((i) => GetAllPostsFromApiMapper()),
-    Bind((i) => HttpService()),
+    Bind.singleton((i) => HomeController(i())),
+    Bind.singleton((i) => AnimePostsBloc(i())),
+    Bind.singleton((i) => GetAllPostsUseCaseImpl(i())),
+    Bind.singleton((i) => GetAllPostsRepositoryImpl(i())),
+    Bind.singleton((i) => GetAllPostsFromApiDatasource(i(), i())),
+    Bind.singleton((i) => GetAllPostsFromApiMapper()),
+    Bind.singleton((i) => HttpService()),
   ];
 
   @override

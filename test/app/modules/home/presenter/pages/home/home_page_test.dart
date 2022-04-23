@@ -18,14 +18,7 @@ class GetAllPostsRepositoryMock extends Mock implements GetAllPostsRepository {}
 class GetAllPostsUseCaseMock extends Mock implements GetAllPostsUseCase {}
 
 void main() {
-  late AnimePostsBlocMock animePostsBloc;
-  late GetAllPostsUseCaseMock getAllPostsUseCase;
-  late GetAllPostsRepositoryMock getAllPostsRepository;
-  late GetAllPostsDatasourceMock getAllPostsDatasource;
   setUp(() {
-    // animePostsBloc = AnimePostsBlocMock();
-    // getAllPostsUseCase = GetAllPostsUseCaseMock();
-    // getAllPostsRepository = GetAllPostsRepositoryMock();
     // getAllPostsDatasource = GetAllPostsDatasourceMock();
     // registerFallbackValue(GetAllPostsParams(1, 10));
     // when(() => getAllPostsDatasource.getAllPosts(any())).thenAnswer(

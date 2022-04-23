@@ -97,12 +97,17 @@ class _HomePageState extends State<HomePage> {
 
   bool isTheLastIndexOfTheAnimePostList(int index) => controller.posts.length == index;
 
-  FutureOr<void> onTapAnimePostCard(String? link) {
-    final url = link ?? '';
-    return canLaunch(url).then((answer) {
-      answer == true ? launch(url) : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Não foi possível abrir o link')));
+  Future<void> onTapAnimePostCard(String? link) async {
+    if (link == null || link.isEmpty) return onAnimePostCardLinkNullOrEmpty();
+    final url = Uri.parse(link);
+    return canLaunchUrl(url).then((answer) {
+      answer == true ? launchUrl(url) : onAnimePostCardLinkNullOrEmpty();
     }).onError<Exception>((error, stacktrace) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
+      onAnimePostCardLinkNullOrEmpty(specificError: error.toString());
     });
+  }
+
+  void onAnimePostCardLinkNullOrEmpty({String? specificError}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(specificError ?? 'Não foi possível abrir o link')));
   }
 }

@@ -1,4 +1,8 @@
 
+import 'package:dio/dio.dart';
+
+import '../../core/constants/endpoints.dart';
+import '../../core/services/http_client/dio/dio_http_client.dart';
 import 'external/datasources/api/mapper/get_all_posts_from_api_mapper.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -18,6 +22,8 @@ class HomeModule extends Module{
     Bind.singleton((i) => GetAllPostsRepositoryImpl(i())),
     Bind.singleton((i) => GetAllPostsFromApiDatasource(i(), i())),
     Bind.singleton((i) => GetAllPostsFromApiMapper()),
+    Bind.singleton((i) => DioHttpClient(i(), baseUrl: Endpoints.baseUrl)),
+    Bind.singleton((i) => Dio())
   ];
 
   @override

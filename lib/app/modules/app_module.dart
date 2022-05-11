@@ -5,12 +5,9 @@ import '../core/constants/endpoints.dart';
 import '../core/services/http_client/dio/dio_http_client.dart';
 import 'home/home_module.dart';
 
-class AppModule extends Module{
+class AppModule extends Module {
   @override
-  final List<Bind> binds = [
-    Bind.singleton((i) => DioHttpClient(i(), baseUrl: Endpoints.baseUrl)),
-    Bind.singleton((i) => Dio()),
-  ];
+  final List<Bind> binds = [];
 
   @override
   final List<ModularRoute> routes = [

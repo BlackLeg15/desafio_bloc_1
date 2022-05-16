@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/anime_posts_bloc.dart';
 import 'home_controller.dart';
+import 'other_page.dart';
 import 'widgets/anime_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
 
@@ -64,6 +65,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Animes'),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const OtherPage()));
+              },
+              icon: const Icon(Icons.next_plan))
+        ],
       ),
       body: BlocConsumer<AnimePostsBloc, AnimePostsState>(
         bloc: controller.animePostsBloc,

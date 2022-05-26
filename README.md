@@ -1,12 +1,18 @@
 # desafio_bloc_1
 
-## Features:
-- Bloc
+## 1 Features
+### 1.1 Architecture
+- Feature-based
 - Clean Dart
-- Modular
+### 1.2 State management
+- BLoC
+- package <i>flutter_bloc</i>
+### 1.3 Dependency injection
+- package <i>flutter_modular</i>
+### 1.4 Tests
 - Unit tests
 - Bloc tests
 
-## Project specs
-- Dart 2.16.1
-- Flutter 2.10.4
+## 2 Project specs
+- Dart 2.17.1
+- Flutter 3.0.1

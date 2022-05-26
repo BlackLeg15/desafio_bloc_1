@@ -15,24 +15,24 @@ import 'payloads/get_all_posts_payload.dart';
 class HttpServiceMock extends Mock implements HttpClient {}
 
 main() {
-  late final HttpServiceMock _httpServiceMock;
-  late final GetAllPostsFromApiDatasource _datasource;
+  late final HttpServiceMock httpServiceMock;
+  late final GetAllPostsFromApiDatasource datasource;
 
   setUpAll(() {
-    _httpServiceMock = HttpServiceMock();
-    _datasource = GetAllPostsFromApiDatasource(_httpServiceMock, GetAllPostsFromApiMapper());
+    httpServiceMock = HttpServiceMock();
+    datasource = GetAllPostsFromApiDatasource(httpServiceMock, GetAllPostsFromApiMapper());
     registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
   group('GetAllPostsUseCase', () {
     test('| should complete successfully', () {
-      when(() => _httpServiceMock.get(any())).thenAnswer((invocation) async => Right(HttpClientResponse(jsonDecode(getAllPostsPayload), -1, '')));
-      final response = _datasource.getAllPosts(GetAllPostsParams(1, 1));
+      when(() => httpServiceMock.get(any())).thenAnswer((invocation) async => Right(HttpClientResponse(jsonDecode(getAllPostsPayload), -1, '')));
+      final response = datasource.getAllPosts(GetAllPostsParams(1, 1));
       expect(response, completion(isA<List<AnimePostEntity>>()));
     });
     test('| should complete with an error', () {
-      when(() => _httpServiceMock.get(any())).thenThrow(ArgumentError('An error occured'));
-      final response = _datasource.getAllPosts(GetAllPostsParams(1, 1));
+      when(() => httpServiceMock.get(any())).thenThrow(ArgumentError('An error occured'));
+      final response = datasource.getAllPosts(GetAllPostsParams(1, 1));
       expect(response, throwsA(isA<ArgumentError>()));
     });
   });

@@ -11,7 +11,7 @@ class AnimePostCardWidget extends StatefulWidget {
   const AnimePostCardWidget({Key? key, required this.animePost, required this.onTap}) : super(key: key);
 
   @override
-  _AnimePostCardWidgetState createState() => _AnimePostCardWidgetState();
+  createState() => _AnimePostCardWidgetState();
 }
 
 class _AnimePostCardWidgetState extends State<AnimePostCardWidget> {

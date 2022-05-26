@@ -11,12 +11,12 @@ import 'package:mocktail/mocktail.dart';
 class GetAllPostsRepositoryMock extends Mock implements GetAllPostsRepository {}
 
 main() {
-  late final GetAllPostsRepositoryMock _repository;
-  late final GetAllPostsUseCaseImpl _usecase;
+  late final GetAllPostsRepositoryMock repository;
+  late final GetAllPostsUseCaseImpl usecase;
 
   setUpAll(() {
-    _repository = GetAllPostsRepositoryMock();
-    _usecase = GetAllPostsUseCaseImpl(_repository);
+    repository = GetAllPostsRepositoryMock();
+    usecase = GetAllPostsUseCaseImpl(repository);
     registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
@@ -25,13 +25,13 @@ main() {
       final goodResponse = [
         AnimePostEntity()
       ];
-      when(() => _repository.getAllPosts(any())).thenAnswer((invocation) async => Right(goodResponse));
-      final response = _usecase(GetAllPostsParams(1, 1));
+      when(() => repository.getAllPosts(any())).thenAnswer((invocation) async => Right(goodResponse));
+      final response = usecase(GetAllPostsParams(1, 1));
       expect(response.then((value) => value.fold(id, id)), completion(goodResponse));
     });
     test('| should complete with an error', () {
-      when(() => _repository.getAllPosts(any())).thenAnswer((_) async => Left(UnknownGetPostsError(message: 'Something wrong happened', stackTrace: StackTrace.empty)));
-      final response = _usecase(GetAllPostsParams(1, 1));
+      when(() => repository.getAllPosts(any())).thenAnswer((_) async => Left(UnknownGetPostsError(message: 'Something wrong happened', stackTrace: StackTrace.empty)));
+      final response = usecase(GetAllPostsParams(1, 1));
       expect(response.then((value) => value.fold(id, id)), completion(isA<UnknownGetPostsError>()));
     });
   });

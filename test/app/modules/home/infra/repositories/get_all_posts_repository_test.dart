@@ -10,12 +10,12 @@ import 'package:mocktail/mocktail.dart';
 class GetAllPostsDatasourceMock extends Mock implements GetAllPostsDatasource{}
 
 main() {
-  late final GetAllPostsDatasourceMock _datasource;
-  late final GetAllPostsRepositoryImpl _repository;
+  late final GetAllPostsDatasourceMock datasource;
+  late final GetAllPostsRepositoryImpl repository;
 
   setUpAll(() {
-    _datasource = GetAllPostsDatasourceMock();
-    _repository = GetAllPostsRepositoryImpl(_datasource);
+    datasource = GetAllPostsDatasourceMock();
+    repository = GetAllPostsRepositoryImpl(datasource);
     registerFallbackValue(GetAllPostsParams(1, 1));
   });
 
@@ -24,13 +24,13 @@ main() {
       final goodResponse = [
         AnimePostEntity()
       ];
-      when(() => _datasource.getAllPosts(any())).thenAnswer((invocation) async => goodResponse);
-      final response = _repository.getAllPosts(GetAllPostsParams(1, 1));
+      when(() => datasource.getAllPosts(any())).thenAnswer((invocation) async => goodResponse);
+      final response = repository.getAllPosts(GetAllPostsParams(1, 1));
       expect(response.then((value) => value.fold(id, id)), completion(goodResponse));
     });
     test('| should complete with an error', () {
-      when(() => _datasource.getAllPosts(any())).thenThrow(ArgumentError());
-      final response = _repository.getAllPosts(GetAllPostsParams(1, 1));
+      when(() => datasource.getAllPosts(any())).thenThrow(ArgumentError());
+      final response = repository.getAllPosts(GetAllPostsParams(1, 1));
       expect(response.then((value) => value.fold(id, id)), completion(isA<UnknownGetPostsError>()));
     });
   });

@@ -16,8 +16,10 @@ class GetAllPostsRepositoryImpl implements GetAllPostsRepository {
     try {
       final result = await _datasource.getAllPosts(params);
       return Right(result);
-    } catch (error, stackTrace) {
-      return Left(UnknownGetPostsError(message: error.toString(), stackTrace: stackTrace));
+    } on GetPostsError catch (exception) {
+      return Left(exception);
+    } catch (exception, stackTrace) {
+      return Left(UnknownGetPostsError(message: exception.toString(), stackTrace: stackTrace));
     }
   }
 }

@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
   void fetchAnimePosts() {
     lockUpdatePostList = true;
-    controller.fetchAnimePosts(onFinishFetchPosts);
+    controller.fetchAnimePosts();
   }
 
   void onFinishFetchPosts() {
@@ -70,6 +70,9 @@ class _HomePageState extends State<HomePage> {
         listener: (context, animePostsState) {
           if (animePostsState is AnimePostsErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(animePostsState.message)));
+          }
+          if (animePostsState is FetchedAnimePostsState) {
+            onFinishFetchPosts();
           }
         },
         builder: (context, animePostsState) {

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../../domain/entities/anime_post_entity.dart';
 import 'bloc/anime_posts_bloc.dart';
 
@@ -8,17 +6,16 @@ class HomeController {
   List<AnimePostEntity> get posts => animePostsBloc.state.animePosts;
   var _anyApiError = false;
 
-  HomeController(this.animePostsBloc);
+  HomeController(this.animePostsBloc) {
+    animePostsBloc.stream.listen((state) {
+      if (state is AnimePostsErrorState) {
+        _anyApiError = false;
+      }
+    });
+  }
 
-  void fetchAnimePosts(VoidCallback onSuccess) {
+  void fetchAnimePosts() {
     if (_anyApiError) return;
-    animePostsBloc.add(
-      FetchAnimePostsEvent(
-        onStateCallback: onSuccess,
-        onErrorCallback: () {
-          _anyApiError = true;
-        },
-      ),
-    );
+    animePostsBloc.add(const FetchAnimePostsEvent());
   }
 }

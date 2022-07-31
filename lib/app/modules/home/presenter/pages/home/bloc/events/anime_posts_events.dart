@@ -6,8 +6,5 @@ abstract class AnimePostsEvent {
 }
 
 class FetchAnimePostsEvent extends AnimePostsEvent {
-  final VoidCallback? onStateCallback;
-  final VoidCallback? onErrorCallback;
-
-  const FetchAnimePostsEvent({this.onStateCallback, this.onErrorCallback});
+  const FetchAnimePostsEvent();
 }

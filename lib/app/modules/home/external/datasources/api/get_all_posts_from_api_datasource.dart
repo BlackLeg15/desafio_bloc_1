@@ -2,6 +2,7 @@
 import '../../../../../core/constants/endpoints.dart';
 import '../../../../../core/services/http_client/base/http_client.dart';
 import '../../../domain/entities/anime_post_entity.dart';
+import '../../../domain/errors/get_posts_error.dart';
 import '../../../domain/params/get_all_posts_params.dart';
 import '../../../infra/datasources/get_all_posts_datasource.dart';
 import 'mapper/get_all_posts_from_api_mapper.dart';
@@ -19,7 +20,7 @@ class GetAllPostsFromApiDatasource implements GetAllPostsDatasource {
       final response = await _httpService.get(Endpoints.postsUrl(params.page, params.numberOfPostsPerPage));
       response.fold(
         (exception) {
-          throw exception;
+          throw GetPostsRequestError(message: exception.message);
         },
         (response) {
           postList = _mapper.fromJsonList(response.data);

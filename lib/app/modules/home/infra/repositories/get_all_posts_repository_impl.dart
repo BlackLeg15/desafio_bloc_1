@@ -19,7 +19,7 @@ class GetAllPostsRepositoryImpl implements GetAllPostsRepository {
     } on GetPostsError catch (exception) {
       return Left(exception);
     } catch (exception, stackTrace) {
-      return Left(UnknownGetPostsError(message: exception.toString(), stackTrace: stackTrace));
+      return Left(UnknownGetPostsError(message: 'Não foi possível recuperar os posts da página ${params.page}', stackTrace: stackTrace));
     }
   }
 }

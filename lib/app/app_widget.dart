@@ -14,7 +14,10 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'Desafio FTeam',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          color: Colors.lightBlue,
+        ),
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,

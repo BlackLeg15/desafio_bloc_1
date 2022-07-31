@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
           if (animePostsState is AnimePostsErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(animePostsState.message)));
           }
-          if (animePostsState is FetchedAnimePostsState) {
+          if (animePostsState is AnimePostsSuccessState) {
             onFinishFetchPosts();
           }
         },
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             itemCount: animePostsList.length + 1,
             itemBuilder: (context, index) {
               if (isTheLastIndexOfTheAnimePostList(index)) {
-                return animePostsState is FetchingAnimePostsState ? const HomeLoadingWidget() : const SizedBox();
+                return animePostsState is AnimePostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
               }
               return AnimePostCardWidget(
                 animePost: animePostsList[index],

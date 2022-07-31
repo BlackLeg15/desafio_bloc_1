@@ -16,6 +16,6 @@ class HomeController {
 
   void fetchAnimePosts() {
     if (_anyApiError) return;
-    animePostsBloc.add(const FetchAnimePostsEvent());
+    animePostsBloc.add(const GetAnimePostsEvent());
   }
 }

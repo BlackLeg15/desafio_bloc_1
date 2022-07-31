@@ -25,10 +25,10 @@ void main() {
           when(() => useCaseMock(any())).thenAnswer((_) async => Right(resultFromUsecase));
         },
         build: () => AnimePostsBloc(useCaseMock),
-        act: (bloc) => bloc.add(const FetchAnimePostsEvent()),
+        act: (bloc) => bloc.add(const GetAnimePostsEvent()),
         expect: () => [
-              FetchingAnimePostsState(const [], 0),
-              FetchedAnimePostsState(resultFromUsecase, 1)
+              AnimePostsLoadingState(const [], 0),
+              AnimePostsSuccessState(resultFromUsecase, 1)
             ],
         verify: (bloc) {
           final animePosts = bloc.state.animePosts;
@@ -43,9 +43,9 @@ void main() {
           when(() => useCaseMock(any())).thenAnswer((_) async => Left(UnknownGetPostsError(message: 'Erro', stackTrace: StackTrace.empty)));
         },
         build: () => AnimePostsBloc(useCaseMock),
-        act: (bloc) => bloc.add(const FetchAnimePostsEvent()),
+        act: (bloc) => bloc.add(const GetAnimePostsEvent()),
         expect: () => [
-              FetchingAnimePostsState(const [], 0),
+              AnimePostsLoadingState(const [], 0),
               AnimePostsErrorState('Erro', const [], 0)
             ],
         verify: (bloc) {

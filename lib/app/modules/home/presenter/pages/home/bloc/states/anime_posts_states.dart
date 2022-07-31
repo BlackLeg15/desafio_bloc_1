@@ -13,12 +13,12 @@ class AnimePostsInitialState extends AnimePostsState {
   AnimePostsInitialState(List<AnimePostEntity> animePosts, {int? initialPage}) : super(animePosts, initialPage ?? FetchAnimePostsParameters.initialPage, FetchAnimePostsParameters.postsPerPage);
 }
 
-class FetchingAnimePostsState extends AnimePostsState {
-  FetchingAnimePostsState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
+class AnimePostsLoadingState extends AnimePostsState {
+  AnimePostsLoadingState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
 }
 
-class FetchedAnimePostsState extends AnimePostsState {
-  FetchedAnimePostsState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
+class AnimePostsSuccessState extends AnimePostsState {
+  AnimePostsSuccessState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
 }
 
 class AnimePostsErrorState extends AnimePostsState {

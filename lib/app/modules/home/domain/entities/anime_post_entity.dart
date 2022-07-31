@@ -1,8 +1,8 @@
 class AnimePostEntity {
-  String? title;
-  String? publicationDate;
-  String? description;
-  String? link;
+  final String? title;
+  final String? publicationDate;
+  final String? description;
+  final String? link;
 
-  AnimePostEntity({this.title, this.publicationDate, this.description, this.link});
+  const AnimePostEntity({this.title, this.publicationDate, this.description, this.link});
 }

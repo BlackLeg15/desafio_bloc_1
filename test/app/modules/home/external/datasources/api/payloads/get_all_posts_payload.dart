@@ -2,7 +2,7 @@ const getAllPostsPayload = r'''
 [
   {
     "id": null,
-    "date": null,
+    "date": "2022-07-30",
     "date_gmt": null,
     "guid": null,
     "modified": null,
@@ -10,10 +10,14 @@ const getAllPostsPayload = r'''
     "slug": null,
     "status": null,
     "type": null,
-    "link": null,
-    "title": null,
+    "link": "https://google.com",
+    "title": {
+      "rendered": "Título"
+    },
     "content": null,
-    "excerpt": null,
+    "excerpt": {
+      "rendered": "Descrição"
+    },
     "author": null,
     "featured_media": null,
     "comment_status": null,

@@ -36,6 +36,6 @@ class AnimePostsErrorState extends AnimePostsState {
   @override
   List<Object?> get props => super.props
     ..addAll([
-      message.hashCode
+      message
     ]);
 }

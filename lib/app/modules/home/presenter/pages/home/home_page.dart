@@ -47,7 +47,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool get canFetch => scrollControllerForPagination.offset >= scrollControllerForPagination.position.maxScrollExtent - 100 && !lockUpdatePostList;
+  bool get canFetch =>
+      scrollControllerForPagination.offset >= scrollControllerForPagination.position.maxScrollExtent - 100 && !lockUpdatePostList;
 
   void fetchAnimePosts() {
     lockUpdatePostList = true;

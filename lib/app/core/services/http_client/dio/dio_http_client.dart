@@ -20,7 +20,7 @@ class DioHttpClient implements HttpClient {
       response = HttpClientResponse(result.data, result.statusCode ?? -1, result.statusMessage ?? '');
       return Right(response);
     } on DioError catch (e) {
-      return Left(HttpClientException(e.message));
+      return Left(HttpClientException(e.message ?? ''));
     }
   }
 }

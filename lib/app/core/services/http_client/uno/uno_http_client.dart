@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:uno/uno.dart';
 
 import '../base/http_client.dart';
@@ -20,7 +19,7 @@ class UnoHttpClient implements HttpClient {
       final result = await _uno.get(path);
       response = HttpClientResponse(result.data, result.status, '');
       return Right(response);
-    } on DioError catch (e) {
+    } on UnoError catch (e) {
       return Left(HttpClientException(e.message));
     }
   }

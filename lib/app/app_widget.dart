@@ -17,10 +17,12 @@ class AppWidget extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           color: Colors.lightBlue,
+          foregroundColor: Colors.white,
         ),
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

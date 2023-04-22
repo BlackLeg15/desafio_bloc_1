@@ -33,12 +33,13 @@ class _AnimePostCardWidgetState extends State<AnimePostCardWidget> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(animePost.title ?? 'No title', style: Theme.of(context).textTheme.headline6?.copyWith()),
+            Text(animePost.title ?? 'No title', style: Theme.of(context).textTheme.titleLarge?.copyWith()),
             const SizedBox(height: 5),
-            if (animePostPublicationDate != null) Align(alignment: Alignment.centerLeft, child: Text('Publicado em: ${formatAnimePostPublicationDateToString(animePostPublicationDate)}', style: Theme.of(context).textTheme.bodyText2)),
+            if (animePostPublicationDate != null) Text('Publicado em: ${formatAnimePostPublicationDateToString(animePostPublicationDate)}', style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 5),
-            Text(formatAnimePostDescription(animePost.description) ?? 'No content', style: Theme.of(context).textTheme.bodyText1),
+            Text(formatAnimePostDescription(animePost.description) ?? 'No content', style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),

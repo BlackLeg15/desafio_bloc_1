@@ -20,10 +20,28 @@ class UnoHttpClient implements HttpClient {
     try {
       final result = await _uno.get(path);
       response = HttpClientResponse(result.data, result.status, '');
-      log('✅ Uno Http Client | GET\nPath: ${result.request.uri}\nHeaders: ${result.request.headers.toString()}');
+      log(
+        '✅ Method: GET\n'
+        'Client: Uno\n'
+        'Path: ${result.request.uri}\n'
+        'Headers: ${result.request.headers.toString()}',
+        name: 'HttpClient',
+      );
       return Right(response);
     } on UnoError catch (e) {
-      log('🔴 Uno Http Client | GET\nPath: ${e.request?.uri}');
+      log(
+        '🔴 Method: GET\n'
+        'Client: Uno\n'
+        'Path: ${e.request?.uri}\n'
+        'Message: ${e.message}\n'
+        'Response Data: ${e.response?.data}',
+        name: 'HttpClient',
+      );
+      // log(
+      //   '🔴 Uno Http Client',
+      //   name: 'HttpClient',
+      //   error: e,
+      // );
       return Left(HttpClientException(e.message, e.stackTrace ?? StackTrace.current));
     }
   }

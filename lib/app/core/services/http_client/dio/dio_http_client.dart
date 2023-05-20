@@ -20,10 +20,16 @@ class DioHttpClient implements HttpClient {
     try {
       final result = await _dio.get(path);
       response = HttpClientResponse(result.data, result.statusCode ?? -1, result.statusMessage ?? '');
-      log('✅ Dio Http Client | GET\nPath ${result.requestOptions.path}\nHeaders: ${result.requestOptions.headers.toString()}');
+      log(
+        '✅ Method: GET\nClient: Dio\nPath ${result.requestOptions.path}\nHeaders: ${result.requestOptions.headers.toString()}',
+        name: 'HttpClient',
+      );
       return Right(response);
     } on DioError catch (e) {
-      log('🔴 Dio Http Client | GET\nPath ${e.requestOptions.path}\nHeaders: ${e.requestOptions.headers.toString()}');
+      log(
+        '🔴 Method: GET\nClient: Dio\nPath ${e.requestOptions.path}\nHeaders: ${e.requestOptions.headers.toString()}',
+        name: 'HttpClient',
+      );
       return Left(HttpClientException(e.message ?? '', e.stackTrace));
     }
   }

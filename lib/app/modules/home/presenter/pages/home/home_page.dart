@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/anime_posts_bloc.dart';
 import 'home_controller.dart';
-import 'widgets/anime_post_card_widget.dart';
+import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   void initHomePage() {
     getHomeControllerInstance();
     configPagination();
-    fetchAnimePosts();
+    fetchBlogPosts();
   }
 
   void getHomeControllerInstance() {
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     scrollControllerForPagination = ScrollController();
     scrollControllerForPagination.addListener(() {
       if (canFetch) {
-        fetchAnimePosts();
+        fetchBlogPosts();
       }
     });
   }
@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
   bool get canFetch =>
       scrollControllerForPagination.offset >= scrollControllerForPagination.position.maxScrollExtent - 100 && !lockUpdatePostList;
 
-  void fetchAnimePosts() {
+  void fetchBlogPosts() {
     lockUpdatePostList = true;
-    controller.fetchAnimePosts();
+    controller.fetchBlogPosts();
   }
 
   void onFinishFetchPosts() {
@@ -69,34 +69,56 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Animes'),
+        title: const Text('Posts'),
         centerTitle: true,
       ),
-      body: BlocConsumer<AnimePostsBloc, AnimePostsState>(
+      body: BlocConsumer<BlogPostsBloc, BlogPostsState>(
         bloc: controller.animePostsBloc,
         listener: (context, animePostsState) {
-          if (animePostsState is AnimePostsErrorState) {
+          if (animePostsState is BlogPostsErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(animePostsState.message)));
+            if (animePostsState.animePosts.isEmpty) {
+              onFinishFetchPosts();
+            }
           }
-          if (animePostsState is AnimePostsSuccessState) {
+          if (animePostsState is BlogPostsSuccessState) {
             onFinishFetchPosts();
           }
         },
         builder: (context, animePostsState) {
           final animePostsList = controller.posts;
           if (animePostsList.isEmpty) {
+            if (animePostsState is BlogPostsErrorState) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      animePostsState.message,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      onPressed: fetchBlogPosts,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Tentar novamente'),
+                    )
+                  ],
+                ),
+              );
+            }
             return const HomeLoadingWidget();
           }
           return ListView.builder(
             controller: scrollControllerForPagination,
             itemCount: animePostsList.length + 1,
             itemBuilder: (context, index) {
-              if (isTheLastIndexOfTheAnimePostList(index)) {
-                return animePostsState is AnimePostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
+              if (isTheLastIndexOfTheBlogPostList(index)) {
+                return animePostsState is BlogPostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
               }
-              return AnimePostCardWidget(
+              return BlogPostCardWidget(
                 animePost: animePostsList[index],
-                onTap: () => onTapAnimePostCard(animePostsList[index].link),
+                onTap: () => onTapBlogPostCard(animePostsList[index].link),
               );
             },
           );
@@ -105,19 +127,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  bool isTheLastIndexOfTheAnimePostList(int index) => controller.posts.length == index;
+  bool isTheLastIndexOfTheBlogPostList(int index) => controller.posts.length == index;
 
-  Future<void> onTapAnimePostCard(String? link) async {
-    if (link == null || link.isEmpty) return onAnimePostCardLinkNullOrEmpty();
+  Future<void> onTapBlogPostCard(String? link) async {
+    if (link == null || link.isEmpty) return onBlogPostCardLinkNullOrEmpty();
     final url = Uri.parse(link);
     return canLaunchUrl(url).then((answer) {
-      answer == true ? launchUrl(url) : onAnimePostCardLinkNullOrEmpty();
+      answer == true ? launchUrl(url) : onBlogPostCardLinkNullOrEmpty();
     }).onError<Exception>((error, stacktrace) {
-      onAnimePostCardLinkNullOrEmpty(specificError: error.toString());
+      onBlogPostCardLinkNullOrEmpty(specificError: error.toString());
     });
   }
 
-  void onAnimePostCardLinkNullOrEmpty({String? specificError}) {
+  void onBlogPostCardLinkNullOrEmpty({String? specificError}) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(specificError ?? 'Não foi possível abrir o link')));
   }
 }

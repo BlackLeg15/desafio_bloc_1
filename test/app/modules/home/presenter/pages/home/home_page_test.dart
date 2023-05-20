@@ -4,7 +4,7 @@ import 'package:desafio_bloc_1/app/modules/home/infra/datasources/get_all_posts_
 import 'package:desafio_bloc_1/app/modules/home/presenter/pages/home/bloc/anime_posts_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
-class AnimePostsBlocMock extends Mock implements AnimePostsBloc {}
+class BlogPostsBlocMock extends Mock implements BlogPostsBloc {}
 
 class GetAllPostsDatasourceMock extends Mock implements GetAllPostsDatasource {}
 
@@ -17,7 +17,7 @@ void main() {
   //   // getAllPostsDatasource = GetAllPostsDatasourceMock();
   //   // registerFallbackValue(GetAllPostsParams(1, 10));
   //   // when(() => getAllPostsDatasource.getAllPosts(any())).thenAnswer(
-  //   //   (invocation) async => List.generate(10, (index) => AnimePostEntity(description: index.toString())),
+  //   //   (invocation) async => List.generate(10, (index) => BlogPostEntity(description: index.toString())),
   //   // );
   //   initModules([
   //     AppModule(),

@@ -28,7 +28,7 @@ main() {
     test('| should complete successfully', () {
       when(() => httpServiceMock.get(any())).thenAnswer((invocation) async => Right(HttpClientResponse(jsonDecode(getAllPostsPayload), -1, '')));
       final response = datasource.getAllPosts(GetAllPostsParams(1, 1));
-      expect(response, completion(isA<List<AnimePostEntity>>()));
+      expect(response, completion(isA<List<BlogPostEntity>>()));
     });
     test('| should complete with an error', () {
       when(() => httpServiceMock.get(any())).thenThrow(ArgumentError('An error occured'));

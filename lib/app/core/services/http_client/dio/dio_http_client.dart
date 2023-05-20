@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -18,9 +20,11 @@ class DioHttpClient implements HttpClient {
     try {
       final result = await _dio.get(path);
       response = HttpClientResponse(result.data, result.statusCode ?? -1, result.statusMessage ?? '');
+      log('✅ Dio Http Client | GET\nPath ${result.requestOptions.path}\nHeaders: ${result.requestOptions.headers.toString()}');
       return Right(response);
     } on DioError catch (e) {
-      return Left(HttpClientException(e.message ?? ''));
+      log('🔴 Dio Http Client | GET\nPath ${e.requestOptions.path}\nHeaders: ${e.requestOptions.headers.toString()}');
+      return Left(HttpClientException(e.message ?? '', e.stackTrace));
     }
   }
 }

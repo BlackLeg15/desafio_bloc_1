@@ -12,7 +12,7 @@ class HomeModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.singleton((i) => HomeController(i())),
-    Bind.singleton<AnimePostsBloc>((i) => AnimePostsBloc(i()), onDispose: (bloc) => bloc.close()),
+    Bind.singleton<BlogPostsBloc>((i) => BlogPostsBloc(i()), onDispose: (bloc) => bloc.close()),
     Bind.singleton((i) => GetAllPostsUseCaseImpl(i())),
     Bind.singleton((i) => GetAllPostsRepositoryImpl(i())),
     Bind.singleton((i) => GetAllPostsFromApiDatasource(i(), i())),

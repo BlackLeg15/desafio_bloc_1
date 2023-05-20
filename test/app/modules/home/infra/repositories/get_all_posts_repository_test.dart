@@ -22,7 +22,7 @@ main() {
   group('GetAllPostsUseCase', () {
     test('| should complete successfully', () {
       final goodResponse = [
-        const AnimePostEntity()
+        const BlogPostEntity()
       ];
       when(() => datasource.getAllPosts(any())).thenAnswer((invocation) async => goodResponse);
       final response = repository.getAllPosts(GetAllPostsParams(1, 1));

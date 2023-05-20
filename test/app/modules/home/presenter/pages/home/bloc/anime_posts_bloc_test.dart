@@ -13,22 +13,22 @@ class GetAllPostsUseCaseMock extends Mock implements GetAllPostsUseCase {}
 void main() {
   group('Teste de chamada do evento de buscar mais posts |', () {
     late GetAllPostsUseCaseMock useCaseMock;
-    late List<AnimePostEntity> resultFromUsecase;
+    late List<BlogPostEntity> resultFromUsecase;
     setUpAll(() {
       useCaseMock = GetAllPostsUseCaseMock();
       registerFallbackValue(GetAllPostsParams(1, 10));
     });
-    blocTest<AnimePostsBloc, AnimePostsState>('1. Bem-sucedida',
+    blocTest<BlogPostsBloc, BlogPostsState>('1. Bem-sucedida',
         setUp: () {
           //SETUP RESULT
-          resultFromUsecase = List.generate(10, (index) => AnimePostEntity(description: index.toString()));
+          resultFromUsecase = List.generate(10, (index) => BlogPostEntity(description: index.toString()));
           when(() => useCaseMock(any())).thenAnswer((_) async => Right(resultFromUsecase));
         },
-        build: () => AnimePostsBloc(useCaseMock),
-        act: (bloc) => bloc.add(const GetAnimePostsEvent()),
+        build: () => BlogPostsBloc(useCaseMock),
+        act: (bloc) => bloc.add(const GetBlogPostsEvent()),
         expect: () => [
-              AnimePostsLoadingState(const [], 0),
-              AnimePostsSuccessState(resultFromUsecase, 1)
+              BlogPostsLoadingState(const [], 0),
+              BlogPostsSuccessState(resultFromUsecase, 1)
             ],
         verify: (bloc) {
           final animePosts = bloc.state.animePosts;
@@ -36,24 +36,24 @@ void main() {
           expect(animePosts, isNotEmpty);
           expect(animePosts[2].description, '2');
         });
-    blocTest<AnimePostsBloc, AnimePostsState>('2. Mal-sucedida',
+    blocTest<BlogPostsBloc, BlogPostsState>('2. Mal-sucedida',
         setUp: () {
           //SETUP RESULT
-          //resultFromUsecase = List.generate(10, (index) => AnimePostEntity(description: index.toString()));
+          //resultFromUsecase = List.generate(10, (index) => BlogPostEntity(description: index.toString()));
           when(() => useCaseMock(any())).thenAnswer((_) async => Left(UnknownGetPostsError(message: 'Erro', stackTrace: StackTrace.empty)));
         },
-        build: () => AnimePostsBloc(useCaseMock),
-        act: (bloc) => bloc.add(const GetAnimePostsEvent()),
+        build: () => BlogPostsBloc(useCaseMock),
+        act: (bloc) => bloc.add(const GetBlogPostsEvent()),
         expect: () => [
-              AnimePostsLoadingState(const [], 0),
-              AnimePostsErrorState('Erro', const [], 0)
+              BlogPostsLoadingState(const [], 0),
+              BlogPostsErrorState('Erro', const [], 0)
             ],
         verify: (bloc) {
           final animePosts = bloc.state.animePosts;
           //VERIFY RESULT
           expect(animePosts, isEmpty);
-          expect(bloc.state, isA<AnimePostsErrorState>());
-          expect((bloc.state as AnimePostsErrorState).message, 'Erro');
+          expect(bloc.state, isA<BlogPostsErrorState>());
+          expect((bloc.state as BlogPostsErrorState).message, 'Erro');
         });
   });
 }

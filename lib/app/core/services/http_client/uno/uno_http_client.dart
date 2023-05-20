@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:uno/uno.dart';
 
@@ -18,9 +20,11 @@ class UnoHttpClient implements HttpClient {
     try {
       final result = await _uno.get(path);
       response = HttpClientResponse(result.data, result.status, '');
+      log('✅ Uno Http Client | GET\nPath: ${result.request.uri}\nHeaders: ${result.request.headers.toString()}');
       return Right(response);
     } on UnoError catch (e) {
-      return Left(HttpClientException(e.message));
+      log('🔴 Uno Http Client | GET\nPath: ${e.request?.uri}');
+      return Left(HttpClientException(e.message, e.stackTrace ?? StackTrace.current));
     }
   }
 }

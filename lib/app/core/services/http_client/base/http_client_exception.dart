@@ -1,5 +1,6 @@
 class HttpClientException {
   final String message;
+  final StackTrace stackTrace;
 
-  HttpClientException(this.message);
+  HttpClientException(this.message, this.stackTrace);
 }

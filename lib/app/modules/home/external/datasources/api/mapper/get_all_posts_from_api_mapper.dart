@@ -2,11 +2,11 @@ import '../../../../domain/entities/anime_post_entity.dart';
 import '../../../../domain/errors/get_posts_error.dart';
 
 class GetAllPostsFromApiMapper {
-  List<AnimePostEntity> fromJsonList(List jsonList) {
+  List<BlogPostEntity> fromJsonList(List jsonList) {
     return jsonList.map((e) => fromJson(e)).toList();
   }
 
-  AnimePostEntity fromJson(Map<String, dynamic> json) {
+  BlogPostEntity fromJson(Map<String, dynamic> json) {
     checkKey(json, 'title', 'Campo title é não existe/é nulo. Response: $json');
     checkKey(json['title'], 'rendered', 'Campo title.rendered é não existe/é nulo. Response: $json');
     checkKey(json, 'date', 'Campo date é não existe/é nulo. Response: $json');
@@ -19,7 +19,7 @@ class GetAllPostsFromApiMapper {
     final description = json['excerpt']!['rendered'];
     final link = json['link'];
 
-    return AnimePostEntity(
+    return BlogPostEntity(
       title: title,
       publicationDate: publicationDate,
       description: description,

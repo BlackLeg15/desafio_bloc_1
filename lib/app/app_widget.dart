@@ -12,9 +12,10 @@ class AppWidget extends StatelessWidget {
       DeviceOrientation.portraitUp
     ]);
     return MaterialApp.router(
-      title: 'Desafio FTeam',
+      title: 'Blog Posts',
       theme: ThemeData(
         useMaterial3: true,
+        colorScheme: const ColorScheme.light(primary: Colors.lightBlue),
         appBarTheme: const AppBarTheme(
           color: Colors.lightBlue,
           foregroundColor: Colors.white,

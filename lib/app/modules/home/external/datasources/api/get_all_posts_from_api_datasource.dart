@@ -14,13 +14,14 @@ class GetAllPostsFromApiDatasource implements GetAllPostsDatasource {
   GetAllPostsFromApiDatasource(this._httpService, this._mapper);
 
   @override
-  Future<List<AnimePostEntity>> getAllPosts(GetAllPostsParams params) async {
-    late List<AnimePostEntity> postList;
+  Future<List<BlogPostEntity>> getAllPosts(GetAllPostsParams params) async {
+    late List<BlogPostEntity> postList;
     try {
-      final response = await _httpService.get(Endpoints.postsUrl(params.page, params.numberOfPostsPerPage));
+      final requestInput = Endpoints.postsUrl(params.page, params.numberOfPostsPerPage);
+      final response = await _httpService.get(requestInput);
       response.fold(
         (exception) {
-          throw GetPostsRequestError(message: exception.message);
+          throw const GetPostsRequestError();
         },
         (response) {
           postList = _mapper.fromJsonList(response.data);

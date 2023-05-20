@@ -1,12 +1,12 @@
 part of '../anime_posts_bloc.dart';
 
 @immutable
-abstract class AnimePostsState extends Equatable {
+abstract class BlogPostsState extends Equatable {
   final int page;
   final int postsPerPage;
-  final List<AnimePostEntity> animePosts;
+  final List<BlogPostEntity> animePosts;
 
-  const AnimePostsState(this.animePosts, this.page, this.postsPerPage);
+  const BlogPostsState(this.animePosts, this.page, this.postsPerPage);
 
   @override
   List<Object?> get props => [
@@ -16,22 +16,22 @@ abstract class AnimePostsState extends Equatable {
       ];
 }
 
-class AnimePostsInitialState extends AnimePostsState {
-  AnimePostsInitialState(List<AnimePostEntity> animePosts, {int? initialPage}) : super(animePosts, initialPage ?? FetchAnimePostsParameters.initialPage, FetchAnimePostsParameters.postsPerPage);
+class BlogPostsInitialState extends BlogPostsState {
+  BlogPostsInitialState(List<BlogPostEntity> animePosts, {int? initialPage}) : super(animePosts, initialPage ?? FetchBlogPostsParameters.initialPage, FetchBlogPostsParameters.postsPerPage);
 }
 
-class AnimePostsLoadingState extends AnimePostsState {
-  AnimePostsLoadingState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
+class BlogPostsLoadingState extends BlogPostsState {
+  BlogPostsLoadingState(List<BlogPostEntity> animePosts, int page) : super(animePosts, page, FetchBlogPostsParameters.postsPerPage);
 }
 
-class AnimePostsSuccessState extends AnimePostsState {
-  AnimePostsSuccessState(List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
+class BlogPostsSuccessState extends BlogPostsState {
+  BlogPostsSuccessState(List<BlogPostEntity> animePosts, int page) : super(animePosts, page, FetchBlogPostsParameters.postsPerPage);
 }
 
-class AnimePostsErrorState extends AnimePostsState {
+class BlogPostsErrorState extends BlogPostsState {
   final String message;
 
-  AnimePostsErrorState(this.message, List<AnimePostEntity> animePosts, int page) : super(animePosts, page, FetchAnimePostsParameters.postsPerPage);
+  BlogPostsErrorState(this.message, List<BlogPostEntity> animePosts, int page) : super(animePosts, page, FetchBlogPostsParameters.postsPerPage);
 
   @override
   List<Object?> get props => super.props

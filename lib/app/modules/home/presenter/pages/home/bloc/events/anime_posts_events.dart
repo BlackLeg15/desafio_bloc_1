@@ -1,10 +1,10 @@
 part of '../anime_posts_bloc.dart';
 
 @immutable
-abstract class AnimePostsEvent {
-  const AnimePostsEvent();
+abstract class BlogPostsEvent {
+  const BlogPostsEvent();
 }
 
-class GetAnimePostsEvent extends AnimePostsEvent {
-  const GetAnimePostsEvent();
+class GetBlogPostsEvent extends BlogPostsEvent {
+  const GetBlogPostsEvent();
 }

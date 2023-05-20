@@ -10,23 +10,23 @@ import '../../../../domain/use_cases/get_all_posts_use_case/get_posts_use_case.d
 part 'events/anime_posts_events.dart';
 part 'states/anime_posts_states.dart';
 
-class AnimePostsBloc extends Bloc<AnimePostsEvent, AnimePostsState> {
+class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  AnimePostsBloc(this.getAllPostsUseCase) : super(AnimePostsInitialState(const [])) {
-    on<GetAnimePostsEvent>((event, emit) async {
+  BlogPostsBloc(this.getAllPostsUseCase) : super(BlogPostsInitialState(const [])) {
+    on<GetBlogPostsEvent>((event, emit) async {
       final currentPage = state.page;
       final pageToBeFetched = currentPage + 1;
-      emit(AnimePostsLoadingState(state.animePosts, currentPage));
-      final result = await getAllPostsUseCase(GetAllPostsParams(pageToBeFetched, FetchAnimePostsParameters.postsPerPage));
-      emit(result.fold<AnimePostsState>((error) {
-        return AnimePostsErrorState(error.message, state.animePosts, currentPage);
+      emit(BlogPostsLoadingState(state.animePosts, currentPage));
+      final result = await getAllPostsUseCase(GetAllPostsParams(pageToBeFetched, FetchBlogPostsParameters.postsPerPage));
+      emit(result.fold<BlogPostsState>((error) {
+        return BlogPostsErrorState(error.message, state.animePosts, currentPage);
       }, (fetchedListOfPosts) {
         final listOfPostsToShow = [
           ...state.animePosts,
           ...fetchedListOfPosts
         ];
-        return AnimePostsSuccessState(listOfPostsToShow, pageToBeFetched);
+        return BlogPostsSuccessState(listOfPostsToShow, pageToBeFetched);
       }));
     });
   }

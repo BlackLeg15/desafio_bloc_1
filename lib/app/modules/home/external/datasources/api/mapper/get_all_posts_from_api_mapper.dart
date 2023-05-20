@@ -1,4 +1,4 @@
-import '../../../../domain/entities/anime_post_entity.dart';
+import '../../../../domain/entities/blog_post_entity.dart';
 import '../../../../domain/errors/get_posts_error.dart';
 
 class GetAllPostsFromApiMapper {

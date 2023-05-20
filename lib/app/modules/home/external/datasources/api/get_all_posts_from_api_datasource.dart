@@ -1,7 +1,7 @@
 
 import '../../../../../core/constants/endpoints.dart';
 import '../../../../../core/services/http_client/base/http_client.dart';
-import '../../../domain/entities/anime_post_entity.dart';
+import '../../../domain/entities/blog_post_entity.dart';
 import '../../../domain/errors/get_posts_error.dart';
 import '../../../domain/params/get_all_posts_params.dart';
 import '../../../infra/datasources/get_all_posts_datasource.dart';

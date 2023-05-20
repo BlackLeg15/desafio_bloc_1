@@ -1,13 +1,13 @@
-import '../../../domain/entities/anime_post_entity.dart';
-import 'bloc/anime_posts_bloc.dart';
+import '../../../domain/entities/blog_post_entity.dart';
+import 'bloc/blog_posts_bloc.dart';
 
 class HomeController {
-  final BlogPostsBloc animePostsBloc;
-  List<BlogPostEntity> get posts => animePostsBloc.state.animePosts;
+  final BlogPostsBloc blogPostsBloc;
+  List<BlogPostEntity> get posts => blogPostsBloc.state.blogPosts;
 
-  const HomeController(this.animePostsBloc);
+  const HomeController(this.blogPostsBloc);
 
   void fetchBlogPosts() {
-    animePostsBloc.add(const GetBlogPostsEvent());
+    blogPostsBloc.add(const GetBlogPostsEvent());
   }
 }

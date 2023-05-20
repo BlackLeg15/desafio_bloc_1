@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:desafio_bloc_1/app/modules/home/domain/entities/anime_post_entity.dart';
+import 'package:desafio_bloc_1/app/modules/home/domain/entities/blog_post_entity.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/errors/get_posts_error.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/params/get_all_posts_params.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/use_cases/get_all_posts_use_case/get_posts_use_case.dart';
-import 'package:desafio_bloc_1/app/modules/home/presenter/pages/home/bloc/anime_posts_bloc.dart';
+import 'package:desafio_bloc_1/app/modules/home/presenter/pages/home/bloc/blog_posts_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -31,10 +31,10 @@ void main() {
               BlogPostsSuccessState(resultFromUsecase, 1)
             ],
         verify: (bloc) {
-          final animePosts = bloc.state.animePosts;
+          final blogPosts = bloc.state.blogPosts;
           //VERIFY RESULT
-          expect(animePosts, isNotEmpty);
-          expect(animePosts[2].description, '2');
+          expect(blogPosts, isNotEmpty);
+          expect(blogPosts[2].description, '2');
         });
     blocTest<BlogPostsBloc, BlogPostsState>('2. Mal-sucedida',
         setUp: () {
@@ -49,9 +49,9 @@ void main() {
               BlogPostsErrorState('Erro', const [], 0)
             ],
         verify: (bloc) {
-          final animePosts = bloc.state.animePosts;
+          final blogPosts = bloc.state.blogPosts;
           //VERIFY RESULT
-          expect(animePosts, isEmpty);
+          expect(blogPosts, isEmpty);
           expect(bloc.state, isA<BlogPostsErrorState>());
           expect((bloc.state as BlogPostsErrorState).message, 'Erro');
         });

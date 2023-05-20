@@ -1,4 +1,4 @@
-part of '../anime_posts_bloc.dart';
+part of '../blog_posts_bloc.dart';
 
 @immutable
 abstract class BlogPostsEvent {

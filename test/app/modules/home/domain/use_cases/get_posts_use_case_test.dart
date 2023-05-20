@@ -1,6 +1,6 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:desafio_bloc_1/app/modules/home/domain/entities/anime_post_entity.dart';
+import 'package:desafio_bloc_1/app/modules/home/domain/entities/blog_post_entity.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/errors/get_posts_error.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/params/get_all_posts_params.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/repositories/get_all_posts_repository.dart';

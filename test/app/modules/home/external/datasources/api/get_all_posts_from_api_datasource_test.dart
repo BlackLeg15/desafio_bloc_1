@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:desafio_bloc_1/app/core/services/http_client/base/http_client.dart';
 import 'package:desafio_bloc_1/app/core/services/http_client/base/http_client_response.dart';
-import 'package:desafio_bloc_1/app/modules/home/domain/entities/anime_post_entity.dart';
+import 'package:desafio_bloc_1/app/modules/home/domain/entities/blog_post_entity.dart';
 import 'package:desafio_bloc_1/app/modules/home/domain/params/get_all_posts_params.dart';
 import 'package:desafio_bloc_1/app/modules/home/external/datasources/api/get_all_posts_from_api_datasource.dart';
 import 'package:desafio_bloc_1/app/modules/home/external/datasources/api/mapper/get_all_posts_from_api_mapper.dart';

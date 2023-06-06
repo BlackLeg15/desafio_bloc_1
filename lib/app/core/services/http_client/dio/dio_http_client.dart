@@ -25,7 +25,7 @@ class DioHttpClient implements HttpClient {
         name: 'HttpClient',
       );
       return Right(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log(
         '🔴 Method: GET\nClient: Dio\nPath ${e.requestOptions.path}\nHeaders: ${e.requestOptions.headers.toString()}',
         name: 'HttpClient',

@@ -37,11 +37,6 @@ class UnoHttpClient implements HttpClient {
         'Response Data: ${e.response?.data}',
         name: 'HttpClient',
       );
-      // log(
-      //   '🔴 Uno Http Client',
-      //   name: 'HttpClient',
-      //   error: e,
-      // );
       return Left(HttpClientException(e.message, e.stackTrace ?? StackTrace.current));
     }
   }

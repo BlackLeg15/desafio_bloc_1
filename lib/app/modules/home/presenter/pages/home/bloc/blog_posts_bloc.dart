@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../../../../core/constants/fetch_blog_posts_parameters.dart';
 import '../../../../domain/entities/blog_post_entity.dart';
@@ -15,6 +16,9 @@ class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
 
   BlogPostsBloc(this.getAllPostsUseCase) : super(BlogPostsInitialState(const [])) {
     on<GetBlogPostsEvent>((event, emit) async {
+      if(state is BlogPostsInitialState){
+        await initializeDateFormatting('pt_BR');
+      }
       final currentPage = state.page;
       final pageToBeFetched = currentPage + 1;
       emit(BlogPostsLoadingState(state.blogPosts, currentPage));

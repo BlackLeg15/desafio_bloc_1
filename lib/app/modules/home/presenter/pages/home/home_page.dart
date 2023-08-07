@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                 return blogPostsState is BlogPostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
               }
               return BlogPostCardWidget(
+                key: Key(blogPostsList[index].id!),
                 blogPost: blogPostsList[index],
                 onTap: () => onTapBlogPostCard(blogPostsList[index].link),
               );

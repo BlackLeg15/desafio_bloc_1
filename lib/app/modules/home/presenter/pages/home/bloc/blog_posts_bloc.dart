@@ -14,9 +14,9 @@ part 'states/blog_posts_states.dart';
 class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  BlogPostsBloc(this.getAllPostsUseCase) : super(BlogPostsInitialState(const [])) {
+  BlogPostsBloc(this.getAllPostsUseCase) : super(const BlogPostsInitialState([])) {
     on<GetBlogPostsEvent>((event, emit) async {
-      if(state is BlogPostsInitialState){
+      if (state is BlogPostsInitialState) {
         await initializeDateFormatting('pt_BR');
       }
       final currentPage = state.page;
@@ -28,7 +28,7 @@ class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
       }, (fetchedListOfPosts) {
         final listOfPostsToShow = [
           ...state.blogPosts,
-          ...fetchedListOfPosts
+          ...fetchedListOfPosts,
         ];
         return BlogPostsSuccessState(listOfPostsToShow, pageToBeFetched);
       }));

@@ -1,4 +1,4 @@
 class FetchBlogPostsParameters {
   static const initialPage = 0;
-  static var postsPerPage = 10;
+  static const postsPerPage = 10;
 }

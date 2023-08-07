@@ -27,7 +27,7 @@ void main() {
         build: () => BlogPostsBloc(useCaseMock),
         act: (bloc) => bloc.add(const GetBlogPostsEvent()),
         expect: () => [
-              BlogPostsLoadingState(const [], 0),
+              const BlogPostsLoadingState([], 0),
               BlogPostsSuccessState(resultFromUsecase, 1)
             ],
         verify: (bloc) {
@@ -45,8 +45,8 @@ void main() {
         build: () => BlogPostsBloc(useCaseMock),
         act: (bloc) => bloc.add(const GetBlogPostsEvent()),
         expect: () => [
-              BlogPostsLoadingState(const [], 0),
-              BlogPostsErrorState('Erro', const [], 0)
+              const BlogPostsLoadingState([], 0),
+              const BlogPostsErrorState('Erro', [], 0)
             ],
         verify: (bloc) {
           final blogPosts = bloc.state.blogPosts;

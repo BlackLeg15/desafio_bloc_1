@@ -9,33 +9,28 @@ abstract class BlogPostsState extends Equatable {
   const BlogPostsState(this.blogPosts, this.page, this.postsPerPage);
 
   @override
-  List<Object?> get props => [
-        page,
-        postsPerPage,
-        blogPosts
-      ];
+  List<Object?> get props => [page, postsPerPage, blogPosts];
 }
 
 class BlogPostsInitialState extends BlogPostsState {
-  BlogPostsInitialState(List<BlogPostEntity> blogPosts, {int? initialPage}) : super(blogPosts, initialPage ?? FetchBlogPostsParameters.initialPage, FetchBlogPostsParameters.postsPerPage);
+  const BlogPostsInitialState(List<BlogPostEntity> blogPosts, {int? initialPage})
+      : super(blogPosts, initialPage ?? FetchBlogPostsParameters.initialPage, FetchBlogPostsParameters.postsPerPage);
 }
 
 class BlogPostsLoadingState extends BlogPostsState {
-  BlogPostsLoadingState(List<BlogPostEntity> blogPosts, int page) : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
+  const BlogPostsLoadingState(List<BlogPostEntity> blogPosts, int page) : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
 }
 
 class BlogPostsSuccessState extends BlogPostsState {
-  BlogPostsSuccessState(List<BlogPostEntity> blogPosts, int page) : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
+  const BlogPostsSuccessState(List<BlogPostEntity> blogPosts, int page) : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
 }
 
 class BlogPostsErrorState extends BlogPostsState {
   final String message;
 
-  BlogPostsErrorState(this.message, List<BlogPostEntity> blogPosts, int page) : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
+  const BlogPostsErrorState(this.message, List<BlogPostEntity> blogPosts, int page)
+      : super(blogPosts, page, FetchBlogPostsParameters.postsPerPage);
 
   @override
-  List<Object?> get props => super.props
-    ..addAll([
-      message
-    ]);
+  List<Object?> get props => super.props..addAll([message]);
 }

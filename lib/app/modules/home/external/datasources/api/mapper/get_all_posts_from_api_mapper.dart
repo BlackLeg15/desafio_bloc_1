@@ -7,23 +7,26 @@ class GetAllPostsFromApiMapper {
   }
 
   BlogPostEntity fromJson(Map<String, dynamic> json) {
-    checkKey(json, 'title', 'Campo title é não existe/é nulo. Response: $json');
-    checkKey(json['title'], 'rendered', 'Campo title.rendered é não existe/é nulo. Response: $json');
-    checkKey(json, 'date', 'Campo date é não existe/é nulo. Response: $json');
-    checkKey(json, 'excerpt', 'Campo excerpt é não existe/é nulo. Response: $json');
+    checkKey(json, 'title', 'Campo title não existe/é nulo. Response: $json');
+    checkKey(json['title'], 'rendered', 'Campo title.rendered não existe/é nulo. Response: $json');
+    checkKey(json, 'date', 'Campo date não existe/é nulo. Response: $json');
+    checkKey(json, 'excerpt', 'Campo excerpt não existe/é nulo. Response: $json');
     checkKey(json['excerpt'], 'rendered', 'Campo excerpt.rendered não existe/é nulo. Response: $json');
     checkKey(json, 'link', 'Campo excerpt.rendered não existe/é nulo. Response: $json');
+    checkKey(json, 'id', 'Campo id não existe/é nulo. Response: $json');
 
     final title = json['title']?['rendered'];
     final publicationDate = json['date'];
     final description = json['excerpt']!['rendered'];
     final link = json['link'];
+    final id = json['id'];
 
     return BlogPostEntity(
       title: title,
       publicationDate: publicationDate,
       description: description,
       link: link,
+      id: id.toString(),
     );
   }
 

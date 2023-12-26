@@ -11,7 +11,7 @@ import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   createState() => _HomePageState();

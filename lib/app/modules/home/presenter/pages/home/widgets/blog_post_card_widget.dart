@@ -10,7 +10,7 @@ class BlogPostCardWidget extends StatefulWidget {
   final BlogPostEntity blogPost;
   final FutureOr<void> Function() onTap;
 
-  const BlogPostCardWidget({Key? key, required this.blogPost, required this.onTap}) : super(key: key);
+  const BlogPostCardWidget({super.key, required this.blogPost, required this.onTap});
 
   @override
   createState() => _BlogPostCardWidgetState();

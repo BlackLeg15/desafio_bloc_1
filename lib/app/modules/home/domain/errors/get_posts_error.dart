@@ -1,16 +1,16 @@
 import '../../../../core/errors/custom_error.dart';
 
 abstract class GetPostsError extends CustomError {
-  const GetPostsError({required String message, required StackTrace stackTrace}) : super(message: message, stackTrace: stackTrace);
+  const GetPostsError({required super.message, required super.stackTrace});
 }
 class UnknownGetPostsError extends GetPostsError {
-  UnknownGetPostsError({required String message, required StackTrace stackTrace}) : super(message: message, stackTrace: stackTrace);
+  UnknownGetPostsError({required super.message, required super.stackTrace});
 }
 class GetPostsMapperError extends GetPostsError {
-  GetPostsMapperError({required String message}) : super(message: message, stackTrace: StackTrace.empty);
+  GetPostsMapperError({required super.message}) : super(stackTrace: StackTrace.empty);
 }
 
 class GetPostsRequestError extends GetPostsError {
-  const GetPostsRequestError({String message = "Não foi possível buscar posts"}) : super(message: message, stackTrace: StackTrace.empty);
+  const GetPostsRequestError({super.message = "Não foi possível buscar posts"}) : super(stackTrace: StackTrace.empty);
 }
 

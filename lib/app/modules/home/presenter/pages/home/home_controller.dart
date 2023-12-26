@@ -3,7 +3,7 @@ import 'bloc/blog_posts_bloc.dart';
 
 class HomeController {
   final BlogPostsBloc blogPostsBloc;
-  List<BlogPostEntity> get posts => blogPostsBloc.state.blogPosts;
+  List<BlogPostEntity> get posts => blogPostsBloc.state.posts;
 
   const HomeController(this.blogPostsBloc);
 

@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/blog_posts_bloc.dart';
+import 'bloc/states/blog_posts_state_freezed.dart';
 import 'home_controller.dart';
 import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
@@ -72,29 +73,29 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Posts'),
         centerTitle: true,
       ),
-      body: BlocConsumer<BlogPostsBloc, BlogPostsState>(
+      body: BlocConsumer<BlogPostsBloc, BlogPostsStateFreezed>(
         bloc: controller.blogPostsBloc,
         listener: (context, blogPostsState) {
-          if (blogPostsState is BlogPostsErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(blogPostsState.message)));
-            if (blogPostsState.blogPosts.isEmpty) {
-              onFinishFetchPosts();
-            }
-          }
-          if (blogPostsState is BlogPostsSuccessState) {
-            onFinishFetchPosts();
-          }
+          blogPostsState.whenOrNull(
+            exception: (posts, page, message) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+              if (blogPostsState.posts.isEmpty) {
+                onFinishFetchPosts();
+              }
+            },
+            success: (posts, page) => onFinishFetchPosts(),
+          );
         },
         builder: (context, blogPostsState) {
           final blogPostsList = controller.posts;
           if (blogPostsList.isEmpty) {
-            if (blogPostsState is BlogPostsErrorState) {
-              return Center(
+            return blogPostsState.maybeWhen<Widget>(
+              exception: (posts, page, message) => Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      blogPostsState.message,
+                      message,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 10),
@@ -105,16 +106,19 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-              );
-            }
-            return const HomeLoadingWidget();
+              ),
+              orElse: () => const HomeLoadingWidget(),
+            );
           }
           return ListView.builder(
             controller: scrollControllerForPagination,
             itemCount: blogPostsList.length + 1,
             itemBuilder: (context, index) {
               if (isTheLastIndexOfTheBlogPostList(index)) {
-                return blogPostsState is BlogPostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
+                return blogPostsState.maybeWhen(
+                  orElse: () => const SizedBox(),
+                  loading: (posts, page) => const HomeLoadingWidget(),
+                );
               }
               return BlogPostCardWidget(
                 key: Key(blogPostsList[index].id!),

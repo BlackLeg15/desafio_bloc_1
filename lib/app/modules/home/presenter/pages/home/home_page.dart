@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/blog_posts_bloc.dart';
-import 'bloc/states/blog_posts_state_freezed.dart';
+import 'bloc/states/blog_posts_state.dart';
 import 'home_controller.dart';
 import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';

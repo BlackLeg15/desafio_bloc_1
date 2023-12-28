@@ -1,10 +1,10 @@
-part of '../blog_posts_bloc.dart';
 
-@immutable
-abstract class BlogPostsEvent {
-  const BlogPostsEvent();
-}
 
-class GetBlogPostsEvent extends BlogPostsEvent {
-  const GetBlogPostsEvent();
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'blog_posts_events.freezed.dart';
+
+@freezed
+sealed class BlogPostsEvent with _$BlogPostsEvent {
+  const factory BlogPostsEvent.get() = Get;
 }

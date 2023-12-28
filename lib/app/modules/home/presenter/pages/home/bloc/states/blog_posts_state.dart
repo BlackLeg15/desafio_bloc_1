@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../../../../core/constants/fetch_blog_posts_parameters.dart';
 import '../../../../../domain/entities/blog_post_entity.dart';
 
-part 'blog_posts_state_freezed.freezed.dart';
+part 'blog_posts_state.freezed.dart';
 
 @freezed
 sealed class BlogPostsStateFreezed with _$BlogPostsStateFreezed {

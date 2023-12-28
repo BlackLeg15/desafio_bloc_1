@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
+
+import 'core/routing/app_router.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -21,9 +23,7 @@ class AppWidget extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
       ),
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
-      debugShowCheckedModeBanner: false,
+      routerConfig: GetIt.I<AppRouter>().config(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/blog_posts_bloc.dart';
@@ -11,6 +12,7 @@ import 'home_controller.dart';
 import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void getHomeControllerInstance() {
-    controller = Modular.get();
+    controller = GetIt.I();
   }
 
   void configPagination() {

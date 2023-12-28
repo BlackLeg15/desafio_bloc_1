@@ -23,11 +23,11 @@ void main() {
 
 void initDeps() {
   GetIt.I.registerSingleton<HttpClient>(UnoHttpClient(baseUrl: Endpoints.baseUrl));
-  GetIt.I.registerSingleton(HomeController(GetIt.I()));
-  GetIt.I.registerSingleton(BlogPostsBloc((GetIt.I())));
-  GetIt.I.registerSingleton<GetAllPostsUseCase>(GetAllPostsUseCaseImpl((GetIt.I())));
-  GetIt.I.registerSingleton<GetAllPostsRepository>(GetAllPostsRepositoryImpl((GetIt.I())));
-  GetIt.I.registerSingleton<GetAllPostsDatasource>(GetAllPostsFromApiDatasource(GetIt.I(), GetIt.I()));
   GetIt.I.registerSingleton(GetAllPostsFromApiMapper());
+  GetIt.I.registerSingleton<GetAllPostsDatasource>(GetAllPostsFromApiDatasource(GetIt.I(), GetIt.I()));
+  GetIt.I.registerSingleton<GetAllPostsRepository>(GetAllPostsRepositoryImpl((GetIt.I())));
+  GetIt.I.registerSingleton<GetAllPostsUseCase>(GetAllPostsUseCaseImpl((GetIt.I())));
+  GetIt.I.registerSingleton(BlogPostsBloc((GetIt.I())));
+  GetIt.I.registerSingleton(HomeController(GetIt.I()));
   GetIt.I.registerSingleton(AppRouter());
 }

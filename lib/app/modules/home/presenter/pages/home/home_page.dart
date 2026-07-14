@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/constants/validation_keys.dart';
 import 'bloc/blog_posts_bloc.dart';
 import 'home_controller.dart';
 import 'widgets/blog_post_card_widget.dart';
@@ -64,6 +65,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key(ValidationKeys.homeScaffold),
       appBar: AppBar(
         title: const Text('Posts'),
         centerTitle: true,
@@ -96,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton.icon(
+                      key: const Key(ValidationKeys.retryButton),
                       onPressed: fetchBlogPosts,
                       icon: const Icon(Icons.refresh),
                       label: const Text('Tentar novamente'),
@@ -107,6 +110,7 @@ class _HomePageState extends State<HomePage> {
             return const HomeLoadingWidget();
           }
           return ListView.builder(
+            key: const Key(ValidationKeys.postsList),
             controller: scrollControllerForPagination,
             itemCount: blogPostsList.length + 1,
             itemBuilder: (context, index) {

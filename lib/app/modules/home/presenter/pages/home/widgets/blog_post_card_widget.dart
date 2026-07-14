@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
+import '../../../../../../core/constants/validation_keys.dart';
 import '../../../../domain/entities/blog_post_entity.dart';
 
 class BlogPostCardWidget extends StatefulWidget {
@@ -26,24 +27,30 @@ class _BlogPostCardWidgetState extends State<BlogPostCardWidget> {
     if (blogPost.publicationDate != null) blogPostPublicationDate = DateTime.tryParse(blogPost.publicationDate!);
     final blogPostTitle = blogPost.title == null || blogPost.title!.isEmpty ? 'N/A' : blogPost.title!;
 
-    return InkWell(
-      onTap: () async {
-        if (lockButtonTapAction) return;
-        lockButtonTapAction = true;
-        await widget.onTap();
-        lockButtonTapAction = false;
-      },
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(blogPostTitle, style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 5),
-            Text(formatBlogPostPublicationDateToString(blogPostPublicationDate), style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 5),
-            Text(formatBlogPostDescription(blogPost.description), style: Theme.of(context).textTheme.bodyLarge),
-          ],
+    return Semantics(
+      identifier: ValidationKeys.blogPostCard,
+      label: ValidationKeys.blogPostCard,
+      container: true,
+      explicitChildNodes: true,
+      child: InkWell(
+        onTap: () async {
+          if (lockButtonTapAction) return;
+          lockButtonTapAction = true;
+          await widget.onTap();
+          lockButtonTapAction = false;
+        },
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(blogPostTitle, style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 5),
+              Text(formatBlogPostPublicationDateToString(blogPostPublicationDate), style: Theme.of(context).textTheme.bodyMedium),
+              const SizedBox(height: 5),
+              Text(formatBlogPostDescription(blogPost.description), style: Theme.of(context).textTheme.bodyLarge),
+            ],
+          ),
         ),
       ),
     );

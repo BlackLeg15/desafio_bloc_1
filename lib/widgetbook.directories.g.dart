@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_import, prefer_relative_imports, directives_ordering
@@ -8,61 +9,62 @@
 // AppGenerator
 // **************************************************************************
 
-import 'dart:async';
-import 'dart:core';
-import 'package:desafio_bloc_1/app/modules/home/domain/entities/blog_post_entity.dart';
-import 'package:desafio_bloc_1/app/modules/home/presenter/pages/home/widgets/blog_post_card_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:widgetbook/widgetbook.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:desafio_bloc_1/app/modules/home/presenter/pages/home/widgets/blog_post_card_widget.dart'
+    as _desafio_bloc_1_app_modules_home_presenter_pages_home_widgets_blog_post_card_widget;
+import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 
-final directories = [
-  WidgetbookFolder(
+final directories = <_widgetbook.WidgetbookNode>[
+  _widgetbook.WidgetbookFolder(
     name: 'app',
     children: [
-      WidgetbookFolder(
+      _widgetbook.WidgetbookFolder(
         name: 'modules',
         children: [
-          WidgetbookFolder(
+          _widgetbook.WidgetbookFolder(
             name: 'home',
             children: [
-              WidgetbookFolder(
+              _widgetbook.WidgetbookFolder(
                 name: 'presenter',
                 children: [
-                  WidgetbookFolder(
+                  _widgetbook.WidgetbookFolder(
                     name: 'pages',
                     children: [
-                      WidgetbookFolder(
+                      _widgetbook.WidgetbookFolder(
                         name: 'home',
                         children: [
-                          WidgetbookFolder(
+                          _widgetbook.WidgetbookFolder(
                             name: 'widgets',
                             children: [
-                              WidgetbookComponent(
+                              _widgetbook.WidgetbookComponent(
                                 name: 'BlogPostCardWidget',
                                 useCases: [
-                                  WidgetbookUseCase(
-                                    name: 'Fullfilled',
-                                    builder: (context) =>
-                                        fullfilledCard(context),
-                                  ),
-                                  WidgetbookUseCase(
+                                  _widgetbook.WidgetbookUseCase(
                                     name: 'Empty',
-                                    builder: (context) => emptyCard(context),
+                                    builder:
+                                        _desafio_bloc_1_app_modules_home_presenter_pages_home_widgets_blog_post_card_widget
+                                            .emptyCard,
+                                  ),
+                                  _widgetbook.WidgetbookUseCase(
+                                    name: 'Fullfilled',
+                                    builder:
+                                        _desafio_bloc_1_app_modules_home_presenter_pages_home_widgets_blog_post_card_widget
+                                            .fullfilledCard,
                                   ),
                                 ],
-                              ),
+                              )
                             ],
-                          ),
+                          )
                         ],
-                      ),
+                      )
                     ],
-                  ),
+                  )
                 ],
-              ),
+              )
             ],
-          ),
+          )
         ],
-      ),
+      )
     ],
-  ),
+  )
 ];

@@ -14,7 +14,7 @@ import 'payloads/get_all_posts_payload.dart';
 
 class HttpServiceMock extends Mock implements HttpClient {}
 
-main() {
+void main() {
   late final HttpServiceMock httpServiceMock;
   late final GetAllPostsFromApiDatasource datasource;
 

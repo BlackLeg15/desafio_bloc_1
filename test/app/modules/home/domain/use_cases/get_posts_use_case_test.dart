@@ -10,7 +10,7 @@ import 'package:mocktail/mocktail.dart';
 
 class GetAllPostsRepositoryMock extends Mock implements GetAllPostsRepository {}
 
-main() {
+void main() {
   late final GetAllPostsRepositoryMock repository;
   late final GetAllPostsUseCaseImpl usecase;
 

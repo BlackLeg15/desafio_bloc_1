@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../../../../core/constants/fetch_blog_posts_parameters.dart';
@@ -11,10 +12,12 @@ import '../../../../domain/use_cases/get_all_posts_use_case/get_posts_use_case.d
 part 'events/blog_posts_events.dart';
 part 'states/blog_posts_states.dart';
 
-class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
+class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState>
+    implements Disposable {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  BlogPostsBloc(this.getAllPostsUseCase) : super(const BlogPostsInitialState([])) {
+  BlogPostsBloc(this.getAllPostsUseCase)
+      : super(const BlogPostsInitialState([])) {
     on<GetBlogPostsEvent>((event, emit) async {
       if (state is BlogPostsInitialState) {
         await initializeDateFormatting('pt_BR');
@@ -22,7 +25,8 @@ class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
       final currentPage = state.page;
       final pageToBeFetched = currentPage + 1;
       emit(BlogPostsLoadingState(state.blogPosts, currentPage));
-      final result = await getAllPostsUseCase(GetAllPostsParams(pageToBeFetched, FetchBlogPostsParameters.postsPerPage));
+      final result = await getAllPostsUseCase(GetAllPostsParams(
+          pageToBeFetched, FetchBlogPostsParameters.postsPerPage));
       emit(result.fold<BlogPostsState>((error) {
         return BlogPostsErrorState(error.message, state.blogPosts, currentPage);
       }, (fetchedListOfPosts) {
@@ -33,5 +37,10 @@ class BlogPostsBloc extends Bloc<BlogPostsEvent, BlogPostsState> {
         return BlogPostsSuccessState(listOfPostsToShow, pageToBeFetched);
       }));
     });
+  }
+
+  @override
+  void dispose() {
+    close();
   }
 }

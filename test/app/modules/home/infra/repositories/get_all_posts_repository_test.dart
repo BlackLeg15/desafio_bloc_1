@@ -9,7 +9,7 @@ import 'package:mocktail/mocktail.dart';
 
 class GetAllPostsDatasourceMock extends Mock implements GetAllPostsDatasource{}
 
-main() {
+void main() {
   late final GetAllPostsDatasourceMock datasource;
   late final GetAllPostsRepositoryImpl repository;
 

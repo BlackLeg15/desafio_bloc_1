@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/blog_posts_bloc.dart';
@@ -11,7 +10,8 @@ import 'widgets/blog_post_card_widget.dart';
 import 'widgets/home_loading_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final HomeController controller;
+  const HomePage({super.key, required this.controller});
 
   @override
   createState() => _HomePageState();
@@ -19,23 +19,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var lockUpdatePostList = false;
-  late final HomeController controller;
   late final ScrollController scrollControllerForPagination;
 
   @override
   void initState() {
-    super.initState();
     initHomePage();
+    super.initState();
   }
 
   void initHomePage() {
-    getHomeControllerInstance();
     configPagination();
     fetchBlogPosts();
-  }
-
-  void getHomeControllerInstance() {
-    controller = Modular.get();
   }
 
   void configPagination() {
@@ -48,11 +42,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool get canFetch =>
-      scrollControllerForPagination.offset >= scrollControllerForPagination.position.maxScrollExtent - 100 && !lockUpdatePostList;
+      scrollControllerForPagination.offset >=
+          scrollControllerForPagination.position.maxScrollExtent - 100 &&
+      !lockUpdatePostList;
 
   void fetchBlogPosts() {
     lockUpdatePostList = true;
-    controller.fetchBlogPosts();
+    widget.controller.fetchBlogPosts();
   }
 
   void onFinishFetchPosts() {
@@ -73,10 +69,11 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: BlocConsumer<BlogPostsBloc, BlogPostsState>(
-        bloc: controller.blogPostsBloc,
+        bloc: widget.controller.blogPostsBloc,
         listener: (context, blogPostsState) {
           if (blogPostsState is BlogPostsErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(blogPostsState.message)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(blogPostsState.message)));
             if (blogPostsState.blogPosts.isEmpty) {
               onFinishFetchPosts();
             }
@@ -86,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           }
         },
         builder: (context, blogPostsState) {
-          final blogPostsList = controller.posts;
+          final blogPostsList = widget.controller.posts;
           if (blogPostsList.isEmpty) {
             if (blogPostsState is BlogPostsErrorState) {
               return Center(
@@ -114,7 +111,9 @@ class _HomePageState extends State<HomePage> {
             itemCount: blogPostsList.length + 1,
             itemBuilder: (context, index) {
               if (isTheLastIndexOfTheBlogPostList(index)) {
-                return blogPostsState is BlogPostsLoadingState ? const HomeLoadingWidget() : const SizedBox();
+                return blogPostsState is BlogPostsLoadingState
+                    ? const HomeLoadingWidget()
+                    : const SizedBox();
               }
               return BlogPostCardWidget(
                 key: Key(blogPostsList[index].id!),
@@ -128,7 +127,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  bool isTheLastIndexOfTheBlogPostList(int index) => controller.posts.length == index;
+  bool isTheLastIndexOfTheBlogPostList(int index) =>
+      widget.controller.posts.length == index;
 
   Future<void> onTapBlogPostCard(String? link) async {
     if (link == null || link.isEmpty) return onBlogPostCardLinkNullOrEmpty();
@@ -141,6 +141,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onBlogPostCardLinkNullOrEmpty({String? specificError}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(specificError ?? 'Não foi possível abrir o link')));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(specificError ?? 'Não foi possível abrir o link')));
   }
 }

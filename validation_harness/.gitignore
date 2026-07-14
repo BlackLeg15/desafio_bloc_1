@@ -1,0 +1,7 @@
+# Build & tooling (path package)
+build/
+.dart_tool/
+
+# Harness runtime outputs (gerados pelo script / E2E)
+artifacts/
+reports/

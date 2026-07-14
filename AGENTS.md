@@ -23,6 +23,7 @@ Flutter 3.44+ · Dart 3.12+ · Clean Architecture · flutter_bloc 9 · flutter_m
 | Tarefa do usuário | Ler primeiro |
 |-------------------|--------------|
 | Trabalho a partir de issue `#N` | `.cursor/skills/delivery-workflow/SKILL.md` |
+| Anexar screenshot no PR | `.cursor/skills/attach-pr-evidence/SKILL.md` |
 | Rodar validação automatizada | `.cursor/skills/run-validation/SKILL.md` |
 | Novo cenário E2E | `.cursor/skills/add-validation-scenario/SKILL.md` |
 | Código do app (`lib/`) | regra `flutter-app` (auto via glob) |

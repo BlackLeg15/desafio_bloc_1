@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/constants/validation_keys.dart';
+import '../../../domain/entities/blog_post_entity.dart';
 import 'bloc/blog_posts_bloc.dart';
 import 'home_controller.dart';
 import 'widgets/blog_post_card_widget.dart';
@@ -64,70 +65,82 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: const Key(ValidationKeys.homeScaffold),
-      appBar: AppBar(
-        title: const Text('Posts'),
-        centerTitle: true,
-      ),
-      body: BlocConsumer<BlogPostsBloc, BlogPostsState>(
-        bloc: widget.controller.blogPostsBloc,
-        listener: (context, blogPostsState) {
-          if (blogPostsState is BlogPostsErrorState) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(blogPostsState.message)));
-            if (blogPostsState.blogPosts.isEmpty) {
-              onFinishFetchPosts();
-            }
-          }
-          if (blogPostsState is BlogPostsSuccessState) {
+    return BlocConsumer<BlogPostsBloc, BlogPostsState>(
+      bloc: widget.controller.blogPostsBloc,
+      listener: (context, blogPostsState) {
+        if (blogPostsState is BlogPostsErrorState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(blogPostsState.message)));
+          if (blogPostsState.blogPosts.isEmpty) {
             onFinishFetchPosts();
           }
-        },
-        builder: (context, blogPostsState) {
-          final blogPostsList = widget.controller.posts;
-          if (blogPostsList.isEmpty) {
-            if (blogPostsState is BlogPostsErrorState) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      blogPostsState.message,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton.icon(
-                      key: const Key(ValidationKeys.retryButton),
-                      onPressed: fetchBlogPosts,
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Tentar novamente'),
-                    )
-                  ],
-                ),
-              );
-            }
-            return const HomeLoadingWidget();
-          }
-          return ListView.builder(
-            key: const Key(ValidationKeys.postsList),
-            controller: scrollControllerForPagination,
-            itemCount: blogPostsList.length + 1,
-            itemBuilder: (context, index) {
-              if (isTheLastIndexOfTheBlogPostList(index)) {
-                return blogPostsState is BlogPostsLoadingState
-                    ? const HomeLoadingWidget()
-                    : const SizedBox();
-              }
-              return BlogPostCardWidget(
-                key: Key(blogPostsList[index].id!),
-                blogPost: blogPostsList[index],
-                onTap: () => onTapBlogPostCard(blogPostsList[index].link),
-              );
-            },
-          );
-        },
-      ),
+        }
+        if (blogPostsState is BlogPostsSuccessState) {
+          onFinishFetchPosts();
+        }
+      },
+      builder: (context, blogPostsState) {
+        final blogPostsList = widget.controller.posts;
+        return Scaffold(
+          key: const Key(ValidationKeys.homeScaffold),
+          appBar: AppBar(
+            title: Text(
+              blogPostsList.isEmpty
+                  ? 'Posts'
+                  : 'Posts (${blogPostsList.length})',
+            ),
+            centerTitle: true,
+          ),
+          body: _buildBody(context, blogPostsState, blogPostsList),
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(
+    BuildContext context,
+    BlogPostsState blogPostsState,
+    List<BlogPostEntity> blogPostsList,
+  ) {
+    if (blogPostsList.isEmpty) {
+      if (blogPostsState is BlogPostsErrorState) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                blogPostsState.message,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton.icon(
+                key: const Key(ValidationKeys.retryButton),
+                onPressed: fetchBlogPosts,
+                icon: const Icon(Icons.refresh),
+                label: const Text('Tentar novamente'),
+              )
+            ],
+          ),
+        );
+      }
+      return const HomeLoadingWidget();
+    }
+    return ListView.builder(
+      key: const Key(ValidationKeys.postsList),
+      controller: scrollControllerForPagination,
+      itemCount: blogPostsList.length + 1,
+      itemBuilder: (context, index) {
+        if (isTheLastIndexOfTheBlogPostList(index)) {
+          return blogPostsState is BlogPostsLoadingState
+              ? const HomeLoadingWidget()
+              : const SizedBox();
+        }
+        return BlogPostCardWidget(
+          key: Key(blogPostsList[index].id!),
+          blogPost: blogPostsList[index],
+          onTap: () => onTapBlogPostCard(blogPostsList[index].link),
+        );
+      },
     );
   }
 

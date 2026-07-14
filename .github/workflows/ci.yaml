@@ -24,8 +24,7 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test --coverage
-      - run: flutter test --machine > test-results.json
+      - run: flutter test --no-pub --coverage --file-reporter json:test-results.json
       - uses: dorny/test-reporter@v1.9.1
         if: always()
         with:

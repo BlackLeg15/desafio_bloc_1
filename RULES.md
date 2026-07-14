@@ -13,8 +13,15 @@ Regras do projeto ficam em **`.cursor/rules/*.mdc`**. O Cursor carrega por `alwa
 
 | Skill | Uso |
 |-------|-----|
+| `.cursor/skills/delivery-workflow/` | Issue → branch → validação → PR |
 | `.cursor/skills/run-validation/` | Executar validação hands-off |
 | `.cursor/skills/add-validation-scenario/` | Criar cenário E2E |
+
+## Fluxo de entrega
+
+- Issues: `.github/ISSUE_TEMPLATE/` (`feat`, `bug`, `chore`)
+- PR: `.github/pull_request_template.md`
+- Guia: `docs/delivery-workflow.md`
 
 ## Entrada para agentes
 

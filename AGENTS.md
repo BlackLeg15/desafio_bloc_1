@@ -22,6 +22,7 @@ Flutter 3.44+ · Dart 3.12+ · Clean Architecture · flutter_bloc 9 · flutter_m
 
 | Tarefa do usuário | Ler primeiro |
 |-------------------|--------------|
+| Trabalho a partir de issue `#N` | `.cursor/skills/delivery-workflow/SKILL.md` |
 | Rodar validação automatizada | `.cursor/skills/run-validation/SKILL.md` |
 | Novo cenário E2E | `.cursor/skills/add-validation-scenario/SKILL.md` |
 | Código do app (`lib/`) | regra `flutter-app` (auto via glob) |
@@ -44,6 +45,8 @@ flutter run                              # app
 3. **Seletores estáveis** — usar `ValidationKeys`, não textos da UI.
 4. **Escopo mínimo** — não refatorar arquitetura ao adicionar E2E; só keys/semantics quando necessário.
 5. **Hands-off** — validação = script único, exit code 0/1, artifacts locais.
+6. **Docs vivem com o código** — mudança de comportamento, path ou processo exige atualizar doc correspondente no mesmo escopo (issue/PR).
+7. **Issues estruturadas** — templates em `.github/ISSUE_TEMPLATE/`; ID = `#N`; fluxo em `docs/delivery-workflow.md`.
 
 ## Não fazer sem pedido
 
@@ -51,6 +54,17 @@ flutter run                              # app
 - Commit/push automático.
 - Docs longas duplicando regras ou skills.
 - Screenshot durante loading (spinner impede captura).
+
+## Entrega (issues → PR)
+
+1. Humano cria issue via template (`feat` / `bug` / `chore`).
+2. Agente lê `#N`, cria branch `tipo/N-slug`, implementa dentro do IN/OUT.
+3. Valida (`flutter test` + harness se issue exigir).
+4. Atualiza docs do checklist da issue.
+5. **Gate humano** — evidências + código aprovados.
+6. Commit (Conventional Commits + `Refs: #N`) → PR (`Closes #N` + template).
+
+Skill: `.cursor/skills/delivery-workflow/` · Detalhes: `docs/delivery-workflow.md`
 
 ## Plano futuro (contexto, não implementar salvo pedido)
 

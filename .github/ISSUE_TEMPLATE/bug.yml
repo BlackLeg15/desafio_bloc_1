@@ -1,0 +1,112 @@
+name: Bug
+description: Comportamento incorreto ou regressão
+title: "[BUG] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **ID:** será `#N` após criar a issue — use em branch, commits e PR (`Refs: #N`).
+
+        Descreva reprodução e critérios em **GIVEN / WHEN / THEN**.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      placeholder: "Ex.: App trava ao rolar lista com rede lenta"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reprodução
+      description: Passos numerados para reproduzir
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Comportamento atual vs esperado
+      value: |
+        | Atual | Esperado |
+        |-------|----------|
+        |       |          |
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional
+      description: Device, versão, logs, screenshots, links
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope_in
+    attributes:
+      label: Escopo IN
+      value: |
+        - [ ] Corrigir o bug descrito
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_out
+    attributes:
+      label: Escopo OUT
+      value: |
+        - [ ] Não refatorar código não relacionado
+        - [ ] Não alterar comportamento fora do bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite (GIVEN / WHEN / THEN)
+      value: |
+        - [ ] GIVEN ... WHEN ... THEN ...
+        - [ ] AND NÃO ... (regressão a evitar)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validação
+      options:
+        - label: "`flutter analyze && flutter test`"
+          required: true
+        - label: "Harness existente — `home_loads_posts`"
+        - label: "Novo cenário E2E para prevenir regressão"
+        - label: "Device Android físico ou emulador"
+
+  - type: checkboxes
+    id: docs
+    attributes:
+      label: Documentação a revisar (se aplicável)
+      options:
+        - label: "`AGENTS.md`"
+        - label: "`.cursor/rules/*`"
+        - label: "`.cursor/skills/*`"
+        - label: "`README.md`"
+        - label: "Nenhuma alteração de doc esperada"
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências esperadas no PR
+      value: |
+        - [ ] `validation_harness/reports/validation_report_latest.json`
+        - [ ] Screenshot(s) demonstrando correção
+    validations:
+      required: true

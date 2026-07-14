@@ -1,0 +1,87 @@
+name: Chore
+description: CI, fluxo de entrega, documentação, tooling ou infraestrutura
+title: "[CHORE] "
+labels:
+  - chore
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **ID:** será `#N` após criar a issue — use em branch, commits e PR (`Refs: #N`).
+
+        Para mudanças de processo, tooling ou docs sem alterar comportamento do app.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      placeholder: "Ex.: Adicionar job de harness no CI"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: Motivação e resultado esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_in
+    attributes:
+      label: Escopo IN
+      value: |
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_out
+    attributes:
+      label: Escopo OUT
+      value: |
+        - [ ] Não alterar comportamento do app sem issue separada
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      value: |
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validação
+      options:
+        - label: "`flutter analyze && flutter test`"
+        - label: "Harness E2E (se afetar validação)"
+        - label: "Revisão manual de docs/processos"
+          required: true
+
+  - type: checkboxes
+    id: docs
+    attributes:
+      label: Documentação a atualizar
+      options:
+        - label: "`AGENTS.md`"
+        - label: "`.cursor/rules/*`"
+        - label: "`.cursor/skills/*`"
+        - label: "`README.md`"
+        - label: "`docs/delivery-workflow.md`"
+          required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências esperadas no PR
+      value: |
+        - [ ] Diff de docs/rules/skills revisado
+        - [ ] CI verde (se aplicável)
+    validations:
+      required: true

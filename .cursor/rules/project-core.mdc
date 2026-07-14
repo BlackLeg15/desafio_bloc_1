@@ -10,5 +10,7 @@ alwaysApply: true
 - HTTP: `DioHttpClient` (não usar `uno`; removido).
 - Harness: pacote path `validation_harness/` — **nunca** importado por `lib/`.
 - Validação hands-off: `validation_harness/scripts/run_harness.ps1` (Android + `--no-uninstall` + adb pull).
-- Commits: só quando o usuário pedir.
+- Commits: só quando o usuário pedir (após OK humano no fluxo de entrega).
+- **Docs vivem com o código** — toda mudança de comportamento, path, comando ou processo exige atualizar `AGENTS.md`, rules ou skills no mesmo escopo.
+- **Issues** — ID = `#N`; branch `tipo/N-slug`; Conventional Commits + `Refs: #N`; PR com `Closes #N` e evidências do harness.
 - Preferir diffs mínimos; match conventions existentes.

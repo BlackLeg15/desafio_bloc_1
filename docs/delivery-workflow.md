@@ -5,7 +5,7 @@ Fluxo de entrega humano + IA para tarefas rastreáveis via GitHub Issues.
 ## Ciclo
 
 ```
-Issue (template) → Branch → Implementação → Validação → Aprovação humana → Commit → PR → Docs
+Contexto (project-context) → Issue (template) → Branch → Implementação → Validação → Aprovação humana → Commit → PR → Docs
 ```
 
 | Etapa | Responsável | Critério |
@@ -78,6 +78,7 @@ Não commitar no git (estão no `.gitignore`). Anexar no PR:
 
 | Skill | Quando |
 |-------|--------|
+| `load-project-context` | Início da tarefa — fontes (tickets, design, docs, MCP) |
 | `delivery-workflow` | Iniciar trabalho a partir de issue |
 | `run-validation` | Executar harness |
 | `add-validation-scenario` | Issue exige novo cenário E2E |

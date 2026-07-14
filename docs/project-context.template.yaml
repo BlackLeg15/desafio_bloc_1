@@ -1,0 +1,56 @@
+# Template — copie para project-context.yaml e preencha por repositório.
+# Uma fonte de verdade: onde buscar design, tickets, docs, código e público-alvo.
+# Skills de processo (delivery-workflow, run-validation) não mudam; só este arquivo.
+
+product:
+  name: "" # ex.: desafio_bloc_1 | ecommerce-app
+  purpose: "" # ex.: Laboratório AI Engineering | App de vendas B2C
+  audience:
+    type: internal | public | study
+    description: ""
+    personas: [] # ex.: [{ id: buyer, description: "..." }]
+
+sources:
+  design:
+    primary: null # null | figma
+    access: null # null | mcp | url
+    mcp_server: null # ex.: figma — id do MCP no Cursor
+    url: null # fallback se access=url
+
+  tickets:
+    primary: github_issues # github_issues | jira | linear
+    access: cli # cli | mcp
+    mcp_server: null # ex.: jira
+    url: "" # board / lista de issues
+    # jira_project_key: PROJ # quando primary=jira
+
+  documentation:
+    - type: in_repo
+      paths: [AGENTS.md, docs/, .cursor/]
+    - type: github_issues_and_prs
+      url: ""
+    # - type: gitbook
+    #   access: mcp
+    #   mcp_server: gitbook
+    #   space_id: ""
+
+  code:
+    primary: github
+    url: ""
+    default_branch: master
+
+capabilities:
+  mcp:
+    enabled: false # true na empresa com Cursor + MCPs
+    servers: [] # ex.: [figma, jira, gitbook]
+
+routing:
+  # Mapeamento: necessidade → fonte (agente consulta após load-project-context)
+  need_ticket: tickets
+  need_design_spec: design
+  need_product_docs: documentation
+  need_code: code
+
+workflows:
+  delivery: docs/delivery-workflow.md
+  validation_script: validation_harness/scripts/run_harness.ps1

@@ -13,9 +13,16 @@ Regras do projeto ficam em **`.cursor/rules/*.mdc`**. O Cursor carrega por `alwa
 
 | Skill | Uso |
 |-------|-----|
+| `.cursor/skills/load-project-context/` | Fontes externas (tickets, design, docs, MCP) |
 | `.cursor/skills/delivery-workflow/` | Issue → branch → validação → PR |
 | `.cursor/skills/run-validation/` | Executar validação hands-off |
 | `.cursor/skills/add-validation-scenario/` | Criar cenário E2E |
+
+## Contexto do produto
+
+- Instância: `docs/project-context.yaml`
+- Template (portar): `docs/project-context.template.yaml`
+- Skill: `load-project-context`
 
 ## Fluxo de entrega
 

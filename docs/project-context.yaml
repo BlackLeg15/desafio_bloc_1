@@ -1,0 +1,52 @@
+# Contexto deste repositório — laboratório de estudo (instância do template).
+# Na empresa: copiar template, preencher Figma/Jira/GitBook e mcp.enabled: true
+
+product:
+  name: desafio_bloc_1
+  purpose: Laboratório Flutter + AI Engineering (validation harness, delivery workflow)
+  audience:
+    type: study
+    description: Uso pessoal para estudos; app não será publicado
+    personas: []
+
+sources:
+  design:
+    primary: null
+    access: null
+    mcp_server: null
+    url: null
+
+  tickets:
+    primary: github_issues
+    access: cli
+    mcp_server: null
+    url: https://github.com/BlackLeg15/desafio_bloc_1/issues
+
+  documentation:
+    - type: in_repo
+      paths: [AGENTS.md, docs/, .cursor/]
+    - type: github_issues_and_prs
+      url: https://github.com/BlackLeg15/desafio_bloc_1
+
+  code:
+    primary: github
+    url: https://github.com/BlackLeg15/desafio_bloc_1
+    default_branch: master
+
+capabilities:
+  mcp:
+    enabled: false
+    servers: []
+    # Empresa (exemplo — ativar ao portar):
+    # enabled: true
+    # servers: [figma, jira, gitbook]
+
+routing:
+  need_ticket: tickets
+  need_design_spec: design
+  need_product_docs: documentation
+  need_code: code
+
+workflows:
+  delivery: docs/delivery-workflow.md
+  validation_script: validation_harness/scripts/run_harness.ps1

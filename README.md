@@ -2,7 +2,7 @@
 
 App Flutter de estudo (Desafio FTeam) — lista paginada de posts do blog IntoxiAnime.
 
-> **Agentes / IA:** comece por [`AGENTS.md`](AGENTS.md) · regras em [`.cursor/rules/`](.cursor/rules/) · skills em [`.cursor/skills/`](.cursor/skills/) · entrega via issues: [`docs/delivery-workflow.md`](docs/delivery-workflow.md)
+> **Agentes / IA:** [`AGENTS.md`](AGENTS.md) · contexto: [`docs/project-context.yaml`](docs/project-context.yaml) · entrega: [`docs/delivery-workflow.md`](docs/delivery-workflow.md)
 
 ## Stack
 

@@ -13,4 +13,5 @@ alwaysApply: true
 - Commits: só quando o usuário pedir (após OK humano no fluxo de entrega).
 - **Docs vivem com o código** — toda mudança de comportamento, path, comando ou processo exige atualizar `AGENTS.md`, rules ou skills no mesmo escopo.
 - **Issues** — ID = `#N`; branch `tipo/N-slug`; Conventional Commits + `Refs: #N`; PR com `Closes #N` e evidências do harness.
+- **Contexto do produto** — `docs/project-context.yaml`; skill `load-project-context` (MCP Figma/Jira/GitBook na empresa).
 - Preferir diffs mínimos; match conventions existentes.

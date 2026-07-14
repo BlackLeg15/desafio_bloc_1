@@ -2,6 +2,8 @@
 
 Laboratório Flutter para estudo + **Validation Harness** hands-off (E2E sem acoplamento a Maestro/Patrol/Appium).
 
+**Contexto do produto:** `docs/project-context.yaml` (design, tickets, docs, MCPs, público) — skill `load-project-context`.
+
 ## Stack (não reexplicar)
 
 Flutter 3.44+ · Dart 3.12+ · Clean Architecture · flutter_bloc 9 · flutter_modular 7 · dio · widgetbook · integration_test (dev)
@@ -22,6 +24,7 @@ Flutter 3.44+ · Dart 3.12+ · Clean Architecture · flutter_bloc 9 · flutter_m
 
 | Tarefa do usuário | Ler primeiro |
 |-------------------|--------------|
+| Contexto do produto / onde buscar tickets, design, docs | `.cursor/skills/load-project-context/SKILL.md` → `docs/project-context.yaml` |
 | Trabalho a partir de issue `#N` | `.cursor/skills/delivery-workflow/SKILL.md` |
 | Rodar validação automatizada | `.cursor/skills/run-validation/SKILL.md` |
 | Novo cenário E2E | `.cursor/skills/add-validation-scenario/SKILL.md` |
@@ -47,6 +50,7 @@ flutter run                              # app
 5. **Hands-off** — validação = script único, exit code 0/1, artifacts locais.
 6. **Docs vivem com o código** — mudança de comportamento, path ou processo exige atualizar doc correspondente no mesmo escopo (issue/PR).
 7. **Issues estruturadas** — templates em `.github/ISSUE_TEMPLATE/`; ID = `#N`; fluxo em `docs/delivery-workflow.md`.
+8. **Contexto portável** — `docs/project-context.yaml` define fontes (GitHub lab; Figma/Jira/GitBook via MCP na empresa).
 
 ## Não fazer sem pedido
 

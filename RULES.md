@@ -14,6 +14,7 @@ Regras do projeto ficam em **`.cursor/rules/*.mdc`**. O Cursor carrega por `alwa
 | Skill | Uso |
 |-------|-----|
 | `.cursor/skills/delivery-workflow/` | Issue → branch → validação → PR |
+| `.cursor/skills/attach-pr-evidence/` | Screenshot do harness no PR (width=300) |
 | `.cursor/skills/run-validation/` | Executar validação hands-off |
 | `.cursor/skills/add-validation-scenario/` | Criar cenário E2E |
 

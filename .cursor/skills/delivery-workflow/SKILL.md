@@ -42,6 +42,7 @@ chore/<N>-<slug-curto>
 |------------|-------|
 | Harness existente | `run-validation` |
 | Novo cenário E2E | `add-validation-scenario` |
+| Anexar screenshot no PR | `attach-pr-evidence` |
 | Só unitários | regra `testing` |
 
 ## Fase 2 — Implementar
@@ -107,14 +108,15 @@ Tipos: `feat`, `fix`, `chore`, `docs`, `test`, `refactor` — escopo opcional en
 - Título: `[#N] tipo(escopo): descrição curta`
 - Corpo: preencher `.github/pull_request_template.md`
 - `Closes #N` no corpo
-- Anexar evidências (screenshots + trecho do report JSON)
+- Criar PR com texto; depois anexar screenshot:
 
 ```bash
 git push -u origin HEAD
-gh pr create --title "[#N] ..." --body-file .github/pull_request_template.md
+gh pr create --title "[#N] ..." --body-file .github/pr-bodies/arquivo.md
+.\scripts\attach-pr-evidence.ps1 -PrNumber <PR> -IssueNumber <N>
 ```
 
-(Ajustar corpo do PR com dados reais antes de criar.)
+Skill: `attach-pr-evidence` — upload + embed `<img width="300">` na descrição.
 
 ## Checklist rápido
 

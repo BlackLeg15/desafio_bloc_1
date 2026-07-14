@@ -51,10 +51,13 @@ Bugs: acrescentar `AND NÃO <regressão>`.
 
 ## Evidências no PR
 
-Não commitar no git (estão no `.gitignore`). Anexar no PR:
+Não commitar no git (estão no `.gitignore`). Embutir no PR via skill `attach-pr-evidence`:
 
-- `validation_harness/reports/validation_report_latest.json` (trecho ou arquivo)
-- Screenshots de `validation_harness/artifacts/`
+```powershell
+.\scripts\attach-pr-evidence.ps1 -PrNumber <PR> -IssueNumber <N>
+```
+
+Imagem com **width=300** (`<img>` HTML) para legibilidade do PR.
 
 ## Documentação por tipo de mudança
 
@@ -80,6 +83,7 @@ Não commitar no git (estão no `.gitignore`). Anexar no PR:
 |-------|--------|
 | `delivery-workflow` | Iniciar trabalho a partir de issue |
 | `run-validation` | Executar harness |
+| `attach-pr-evidence` | Screenshot no PR após `gh pr create` |
 | `add-validation-scenario` | Issue exige novo cenário E2E |
 
 ## Leitura de issue pelo agente

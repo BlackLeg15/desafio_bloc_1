@@ -42,7 +42,9 @@ Closes #<!-- número da issue -->
 
 ### Screenshots
 
-<!-- Arraste imagens de validation_harness/artifacts/ ou descreva paths -->
+<!-- O agente executa attach-pr-evidence após criar o PR (width=300) -->
+
+<img src="URL" width="300" alt="descrição">
 
 ## Documentação alterada
 

@@ -1,0 +1,92 @@
+name: Feature
+description: Nova funcionalidade ou melhoria no app, harness ou tooling
+title: "[FEAT] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **ID:** será `#N` após criar a issue — use em branch, commits e PR (`Refs: #N`).
+
+        Preencha todos os campos. Critérios de aceite em **GIVEN / WHEN / THEN**.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      description: Uma frase — verbo + objeto + contexto
+      placeholder: "Ex.: Exibir indicador de erro quando a API de posts falhar"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: Por que isso existe? Links, prints, referências
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_in
+    attributes:
+      label: Escopo IN
+      description: O que está incluído (checklist)
+      value: |
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_out
+    attributes:
+      label: Escopo OUT
+      description: O que NÃO fazer
+      value: |
+        - [ ] Não refatorar arquitetura fora do necessário
+        - [ ] Não alterar dependências sem justificativa na issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite (GIVEN / WHEN / THEN)
+      description: Critérios testáveis e observáveis
+      value: |
+        - [ ] GIVEN ... WHEN ... THEN ...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validação
+      options:
+        - label: "`flutter analyze && flutter test`"
+          required: true
+        - label: "Harness existente — `home_loads_posts`"
+        - label: "Novo cenário E2E necessário (descrever no contexto)"
+        - label: "Device Android físico ou emulador"
+
+  - type: checkboxes
+    id: docs
+    attributes:
+      label: Documentação a revisar (se aplicável)
+      options:
+        - label: "`AGENTS.md` — paths, comandos ou roteamento"
+        - label: "`.cursor/rules/*` — convenções"
+        - label: "`.cursor/skills/*` — workflows"
+        - label: "`README.md` — visão geral para humanos"
+        - label: "Nenhuma alteração de doc esperada"
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências esperadas no PR
+      value: |
+        - [ ] `validation_harness/reports/validation_report_latest.json`
+        - [ ] Screenshot(s) em `validation_harness/artifacts/`
+    validations:
+      required: true

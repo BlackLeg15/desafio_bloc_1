@@ -121,8 +121,12 @@ Evidência local: ``$ScreenshotPath``
         $body += "`n`n$screenshotSection"
     }
 
+    # Remove markdown image duplicates left from edições anteriores.
+    $body = $body -replace '(?m)^!\[.*?\]\(.*?\)\s*$', ''
+
     $tempBody = Join-Path $env:TEMP "pr-$PrNumber-body.md"
-    Set-Content -Path $tempBody -Value $body -Encoding UTF8 -NoNewline
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($tempBody, $body.TrimEnd() + "`n", $utf8NoBom)
 
     try {
         & $GhScript pr edit $PrNumber --body-file $tempBody | Out-Null

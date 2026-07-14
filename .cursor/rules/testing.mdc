@@ -1,0 +1,17 @@
+---
+description: Testes unitários e BLoC
+globs: test/**
+alwaysApply: false
+---
+
+# Testing
+
+- Framework: `flutter_test`, `mocktail`, `bloc_test`.
+- Rodar: `flutter test` (não confundir com `integration_test/harness_test.dart`).
+- Imports: package `desafio_bloc_1/...`.
+- `main()` tipado: `void main()`.
+- Payloads de teste em `test/.../payloads/` — IDs da API não podem ser `null` se o mapper exige.
+
+## Cobertura existente
+
+domain, infra, external datasource, BLoC. Sem widget tests ainda.

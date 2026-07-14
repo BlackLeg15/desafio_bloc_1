@@ -1,0 +1,39 @@
+---
+description: Validation harness — interfaces, adapters, cenários E2E
+globs: validation_harness/**,integration_test/**
+alwaysApply: false
+---
+
+# Validation Harness
+
+## Camadas
+
+| Camada | Path |
+|--------|------|
+| Interfaces | `validation_harness/lib/core/interfaces/` |
+| Orquestrador | `validation_harness/lib/core/validation_harness.dart` |
+| Adapters | `validation_harness/lib/adapters/` |
+| Cenários | `validation_harness/lib/scenarios/` |
+| Entry | `integration_test/harness_test.dart` |
+
+## Interfaces (não quebrar contrato)
+
+- `AppDriver`, `ArtifactCollector`, `LogSink`, `ReportWriter`, `Scenario`
+
+## Adapter atual
+
+`IntegrationTestDriver` + `IntegrationTestArtifactCollector` — base `integration_test`.
+
+Screenshots: bytes PNG → storage externo Android → `adb pull` pelo script.
+
+## Novo cenário
+
+1. Classe em `scenarios/` implementando `Scenario`.
+2. Registrar em `integration_test/harness_test.dart`.
+3. Usar `ValidationKeys` — nunca acoplar a finders de ferramenta externa no cenário.
+
+## Anti-patterns
+
+- Maestro/Patrol/Appium dentro de `lib/`.
+- `pumpAndSettle()` com loading infinito — usar `pump` + timeouts.
+- Screenshot no loading spinner.

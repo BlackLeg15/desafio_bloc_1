@@ -1,0 +1,33 @@
+---
+description: Convenções do app Flutter (lib/)
+globs: lib/**
+alwaysApply: false
+---
+
+# Flutter App
+
+## Arquitetura
+
+```
+presenter → domain ← infra ← external
+```
+
+Feature única: `lib/app/modules/home/`. BLoC: `BlogPostsBloc`. Controller: `HomeController`.
+
+## DI / rotas
+
+- Registro em `lib/main.dart` via `createModule`.
+- `HomePage` recebe `HomeController` por construtor (não `Modular.get()` na page).
+
+## Testabilidade E2E
+
+Keys em `lib/app/core/constants/validation_keys.dart`:
+
+- `home_scaffold`, `posts_list`, `home_loading`, `retry_button`, `blog_post_card`
+
+Cards: `Semantics(identifier: ValidationKeys.blogPostCard, ...)`.
+
+## Ao alterar UI
+
+- Adicionar key/semantics antes de referenciar no harness.
+- Não mover lógica de negócio para widgets por causa de testes.

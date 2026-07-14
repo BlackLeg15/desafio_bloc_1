@@ -1,0 +1,14 @@
+---
+description: Invariantes globais do laboratório Flutter + validation harness
+alwaysApply: true
+---
+
+# Project Core
+
+- App: `desafio_bloc_1` — posts paginados (API IntoxiAnime), uma feature (`home`).
+- DI: `flutter_modular` 7 — bindings inline em `lib/main.dart` (`createModule`).
+- HTTP: `DioHttpClient` (não usar `uno`; removido).
+- Harness: pacote path `validation_harness/` — **nunca** importado por `lib/`.
+- Validação hands-off: `validation_harness/scripts/run_harness.ps1` (Android + `--no-uninstall` + adb pull).
+- Commits: só quando o usuário pedir.
+- Preferir diffs mínimos; match conventions existentes.
